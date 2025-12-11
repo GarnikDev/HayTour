@@ -10,14 +10,14 @@ import lombok.Data;
 @Data
 public class Bicycle {
     @Id
-    @Column(name = "\"Id\"")
+    @Column(name = "\"Id\"", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "\"District_id\"", nullable = false)
     private District district;
 
-    @Column(name = "\"Type\"")
+    @Column(name = "\"Type\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private BikeType type;  // Or BikeType enum: @Enumerated(EnumType.STRING)
 }

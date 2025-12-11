@@ -1,8 +1,7 @@
 package com.sevitours.demo.bicycle.services;
 
-import com.sevitours.demo.bicycle.Bicycle;
-import com.sevitours.demo.bicycle.BicycleRepository;
-import com.sevitours.demo.bicycle.Query;
+import com.sevitours.demo.Query;
+import com.sevitours.demo.bicycle.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -10,18 +9,24 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GetBicycleService implements Query<Void, String> {
+public class GetBicycleService implements Query<Void, List<BicycleDto>> {
 
-    public final BicycleRepository bicycleRepository;
+    private final BicycleRepository bicycleRepository;
+    private final BicycleMapper bicycleMapper;
 
-    public GetBicycleService(BicycleRepository bicycleRepository) {
+    public GetBicycleService(BicycleRepository bicycleRepository,
+                             BicycleMapper bicycleMapper) {
         this.bicycleRepository = bicycleRepository;
+        this.bicycleMapper = bicycleMapper;
     }
 
     @Override
-    public ResponseEntity<List<Bicycle>> execute(Void input) {
-        List<Bicycle>  bicycles = bicycleRepository.findAll();
+    public ResponseEntity<List<BicycleDto>> execute(Void input) {
+        List<BicycleDto> bicyclesDto = bicycleRepository.findAll()
+                .stream()
+                .map(bicycleMapper::toDto)
+                .toList();
 
-        return ResponseEntity.status(HttpStatus.OK).body(bicycles);
+        return ResponseEntity.status(HttpStatus.OK).body(bicyclesDto);
     }
 }

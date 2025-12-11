@@ -18,7 +18,11 @@ public class BicycleController {
     private final GetBicycleService getBicycleService;
     private final DeleteBicycle deleteBicycle;
 
-    public BicycleController(CreateBicycleService createBicycleService, GetBicycleService getBicycleService, UpdateBicycleService updateBicycleService, DeleteBicycle deleteBicycle) {
+    public BicycleController(CreateBicycleService createBicycleService,
+                             GetBicycleService getBicycleService,
+                             UpdateBicycleService updateBicycleService,
+                             DeleteBicycle deleteBicycle) {
+
         this.createBicycleService = createBicycleService;
         this.getBicycleService = getBicycleService;
         this.updateBicycleService = updateBicycleService;
@@ -32,7 +36,7 @@ public class BicycleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Bicycle>> readBicycle() {
+    public ResponseEntity<List<BicycleDto>> getAllBicycles() {
         return getBicycleService.execute(null);
     }
 

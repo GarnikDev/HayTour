@@ -7,22 +7,23 @@ import lombok.Data;
 @Table(name = "\"Client\"")
 @Data
 public class Client {
+
     @Id
-    @Column(name = "\"Id\"")
+    @Column(name = "\"Id\"", nullable = false)
     private Integer id;
 
-    @Column(name = "\"Name\"")
+    @Column(name = "\"Name\"", nullable = false)
     private String name;
 
-    @Column(name = "\"Email\"")
+    @Column(name = "\"Email\"", nullable = false)
     private String email;
 
-    @Column(name = "\"Phone\"")
+    @Column(name = "\"Phone\"", nullable = false)
     private String phone;
 
     @Column(name = "\"Country\"")
     private String country;
 
-    @Column(name = "\"Language\"")
+    @Column(name = "\"Language\"", nullable = false)
     private String language;
 }

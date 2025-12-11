@@ -1,7 +1,7 @@
-package com.sevitours.demo.bicycle;
+package com.sevitours.demo;
 
 import org.springframework.http.ResponseEntity;
 
 public interface Command <I, O>{
-    ResponseEntity<String> execute(I input);
+    ResponseEntity<O> execute(I input);
 }

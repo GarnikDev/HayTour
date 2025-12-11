@@ -1,5 +1,6 @@
 package com.sevitours.demo.tour;
 
+import com.sevitours.demo.bicycle.Bicycle;
 import com.sevitours.demo.common.enums.TourType;
 import com.sevitours.demo.district.District;
 import com.sevitours.demo.guide.Guide;
@@ -7,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "\"Tour\"")
@@ -36,4 +38,10 @@ public class Tour {
     @Enumerated(EnumType.STRING)
     @Column(name = "\"Type\"")
     private TourType type;  // Or TourType enum
+
+    @ManyToMany
+    @JoinTable(name = "\"Tour_Bike\"",
+            joinColumns = @JoinColumn(name = "\"Tour_Id\""),
+            inverseJoinColumns = @JoinColumn(name = "\"Bike_Id\""))
+    private List<Bicycle> bikes;
 }

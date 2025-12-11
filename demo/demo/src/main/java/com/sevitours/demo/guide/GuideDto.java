@@ -7,10 +7,10 @@ import java.time.LocalDate;
 public class GuideDto {
     private Integer id;
     private Integer districtId;
-    private String idNumber;
     private String name;
     private String email;
     private String phone;
     private Integer stars;
     private LocalDate startDate;
+    private String idNumber;
 }
