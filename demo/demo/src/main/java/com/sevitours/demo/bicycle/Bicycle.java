@@ -20,4 +20,9 @@ public class Bicycle {
     @Column(name = "\"Type\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private BikeType type;  // Or BikeType enum: @Enumerated(EnumType.STRING)
+
+    public Bicycle(District district, BikeType type) {
+        this.district = district;
+        this.type = type;
+    }
 }

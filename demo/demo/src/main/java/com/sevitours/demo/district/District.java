@@ -24,4 +24,5 @@ public class District {
 
     @Column(name = "\"Email\"", nullable = false)
     private String email;
+
 }
