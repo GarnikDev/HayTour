@@ -1,7 +1,7 @@
 package com.sevitours.demo.bicycle;
 
 import com.sevitours.demo.bicycle.services.CreateBicycleService;
-import com.sevitours.demo.bicycle.services.DeleteBicycle;
+import com.sevitours.demo.bicycle.services.DeleteBicycleService;
 import com.sevitours.demo.bicycle.services.GetBicycleService;
 import com.sevitours.demo.bicycle.services.UpdateBicycleService;
 import org.springframework.http.ResponseEntity;
@@ -11,22 +11,23 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("/bicycles")
 public class BicycleController {
 
     private final CreateBicycleService createBicycleService;
     private final UpdateBicycleService updateBicycleService;
     private final GetBicycleService getBicycleService;
-    private final DeleteBicycle deleteBicycle;
+    private final DeleteBicycleService deleteBicycleService;
 
     public BicycleController(CreateBicycleService createBicycleService,
                              GetBicycleService getBicycleService,
                              UpdateBicycleService updateBicycleService,
-                             DeleteBicycle deleteBicycle) {
+                             DeleteBicycleService deleteBicycleService) {
 
         this.createBicycleService = createBicycleService;
         this.getBicycleService = getBicycleService;
         this.updateBicycleService = updateBicycleService;
-        this.deleteBicycle = deleteBicycle;
+        this.deleteBicycleService = deleteBicycleService;
     }
 
 
@@ -47,7 +48,7 @@ public class BicycleController {
 
     @DeleteMapping
     public ResponseEntity<String> deleteBicycle() {
-        return deleteBicycle.execute(null);
+        return deleteBicycleService.execute(null);
     }
 
 }

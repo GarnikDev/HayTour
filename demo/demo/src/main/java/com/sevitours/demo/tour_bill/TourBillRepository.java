@@ -1,4 +1,6 @@
 package com.sevitours.demo.tour_bill;
 
-public class TourBillRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TourBillRepository extends JpaRepository<TourBill, Integer> {
 }

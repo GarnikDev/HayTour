@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DeleteBicycle implements Command<Void, String> {
+public class DeleteBicycleService implements Command<Void, String> {
     @Override
     public ResponseEntity<String> execute(Void input) {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Bicycle Deleted");

@@ -5,7 +5,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface DistrictMapper {
-    @Mapping(source = "id", target = "id")
     DistrictDto toDto(District entity);
 
     @Mapping(target = "id", ignore = true)

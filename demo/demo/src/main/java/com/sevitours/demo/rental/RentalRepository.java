@@ -1,4 +1,6 @@
 package com.sevitours.demo.rental;
 
-public class RentalRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RentalRepository extends JpaRepository<Rental, Integer> {
 }
