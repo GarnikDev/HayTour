@@ -2,7 +2,6 @@ package com.sevitours.demo.bicycle.services;
 
 import com.sevitours.demo.Command;
 import com.sevitours.demo.bicycle.Bicycle;
-import com.sevitours.demo.bicycle.BicycleMapper;
 import com.sevitours.demo.bicycle.BicycleRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +13,9 @@ import java.util.List;
 public class CreateBicycleService implements Command<Bicycle, String> {
 
     private final BicycleRepository bicycleRepository;
-    private final BicycleMapper bicycleMapper;
 
-    public CreateBicycleService(BicycleRepository bicycleRepository, BicycleMapper bicycleMapper) {
+    public CreateBicycleService(BicycleRepository bicycleRepository) {
         this.bicycleRepository = bicycleRepository;
-        this.bicycleMapper = bicycleMapper;
     }
 
     @Override

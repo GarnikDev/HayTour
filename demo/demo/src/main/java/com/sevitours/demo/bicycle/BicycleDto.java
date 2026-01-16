@@ -8,4 +8,7 @@ public class BicycleDto {
     private Integer id;
     private Integer districtId;
     private BikeType type;
+
+    public BicycleDto(Bicycle bicycle) {
+    }
 }
