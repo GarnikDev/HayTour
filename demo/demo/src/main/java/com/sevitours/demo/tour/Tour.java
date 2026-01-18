@@ -25,10 +25,6 @@ public class Tour {
     @JoinColumn(name = "\"Guide_id\"", nullable = false)
     private Guide guide;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"District_id\"", nullable = false)
-    private District district;
-
     @Column(name = "\"Adult_count\"")
     private Integer adultCount;
 
@@ -41,7 +37,7 @@ public class Tour {
 
     @ManyToMany
     @JoinTable(name = "\"Tour_Bike\"",
-            joinColumns = @JoinColumn(name = "\"Tour_Id\""),
-            inverseJoinColumns = @JoinColumn(name = "\"Bike_Id\""))
+            joinColumns = @JoinColumn(name = "\"Tour_id\""),
+            inverseJoinColumns = @JoinColumn(name = "\"Bicycle_id\""))
     private List<Bicycle> bikes;
 }

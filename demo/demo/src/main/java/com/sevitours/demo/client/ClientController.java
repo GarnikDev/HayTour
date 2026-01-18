@@ -1,16 +1,14 @@
 package com.sevitours.demo.client;
 
-import com.sevitours.demo.client.services.CreateClientService;
-import com.sevitours.demo.client.services.DeleteClientService;
-import com.sevitours.demo.client.services.GetClientService;
-import com.sevitours.demo.client.services.UpdateClientService;
+import com.sevitours.demo.client.services.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/clients")
+//@RequestMapping("/clients")
 public class ClientController {
     private final GetClientService getClientService;
     private final CreateClientService createClientService;
@@ -27,13 +25,35 @@ public class ClientController {
         this.updateClientService = updateClientService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> createClient(){
-        return createClientService.execute(null);
+    @PostMapping("/client") // Will probably need to be improved in order to ensure the district with the id exists
+    public ResponseEntity<ClientDto> createClient(@RequestBody Client client) {
+        return createClientService.execute(client);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ClientDto>> getAllClients() {
-        return getClientService.execute(null);
+    @GetMapping("/clients/view")
+    public String getAllClients(Model model) {
+        model.addAttribute("clients", getClientService.findAllClients());
+        return "client-list";
+    }
+
+    @GetMapping("/clients/view/id-{id}")
+    public ResponseEntity<ClientDto> getClient(@PathVariable Integer id) {
+        return getClientService.execute(id);
+    }
+
+    @GetMapping("/clients/view/name-{name}")
+    public ResponseEntity<List<ClientDto>> getClientByName(@PathVariable String name) {
+        return getClientService.execute(name);
+    }
+
+    @PutMapping("/clients/edit/{id}")
+    public ResponseEntity<ClientDto> updateClient(@PathVariable Integer id, @RequestBody Client client) {
+        getClientService.execute(id);
+        return updateClientService.execute(new UpdateClientCommand(id, client));
+    }
+
+    @DeleteMapping("/clients/delete/{id}")
+    public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
+        return deleteClientService.execute(id);
     }
 }

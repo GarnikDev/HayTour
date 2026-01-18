@@ -19,44 +19,47 @@ public class BicycleController {
     private final UpdateBicycleService updateBicycleService;
     private final GetBicycleService getBicycleService;
     private final DeleteBicycleService deleteBicycleService;
-    private final GetBicycleByIdService getBicycleByIdService;
 
     public BicycleController(CreateBicycleService createBicycleService,
                              GetBicycleService getBicycleService,
                              UpdateBicycleService updateBicycleService,
-                             DeleteBicycleService deleteBicycleService,
-                             GetBicycleByIdService getBicycleByIdService) {
+                             DeleteBicycleService deleteBicycleService) {
 
         this.createBicycleService = createBicycleService;
         this.getBicycleService = getBicycleService;
         this.updateBicycleService = updateBicycleService;
         this.deleteBicycleService = deleteBicycleService;
-        this.getBicycleByIdService = getBicycleByIdService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> createBicycle(@RequestBody Bicycle bicycle) {
+    @PostMapping("/post")
+    public ResponseEntity<BicycleDto> createBicycle(@RequestBody Bicycle bicycle) {
         return createBicycleService.execute(bicycle);
     }
 
-    @GetMapping
+    @GetMapping("/view")
     public ResponseEntity<List<BicycleDto>> getAllBicycles() {
-        return getBicycleService.execute(null);
+        Void input = null;
+        return getBicycleService.execute(input);
     }
 
-    @GetMapping
+    @GetMapping("/view/id/{id}")
     public ResponseEntity<BicycleDto> getBicycleById(@PathVariable Integer id) {
-        return getBicycleByIdService.execute(id);
+        return getBicycleService.execute(id);
     }
 
-    @PutMapping
-    public ResponseEntity<String> updateBicycle() {
-        return updateBicycleService.execute(null);
+    @GetMapping("/view/type/{type}")
+    public ResponseEntity<List<BicycleDto>> getAllBicyclesByType(@PathVariable BikeType type) {
+        return getBicycleService.execute(type);
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteBicycle() {
-        return deleteBicycleService.execute(null);
+    @PutMapping("/put/{id}")
+    public ResponseEntity<BicycleDto> updateBicycle(@PathVariable Integer id, @RequestBody Bicycle bicycle) {
+        return updateBicycleService.execute(new UpdateBicycleCommand(bicycle, id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBicycle(@PathVariable Integer id) {
+        return deleteBicycleService.execute(id);
     }
 
 }

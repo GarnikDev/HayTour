@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SevitoursApplication {
+public class HayTourApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(SevitoursApplication.class, args);
+        SpringApplication.run(HayTourApplication.class, args);
 	}
 }

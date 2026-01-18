@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class Bicycle {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"", nullable = false)
     private Integer id;
 
@@ -20,6 +21,9 @@ public class Bicycle {
     @Column(name = "\"Type\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private BikeType type;  // Or BikeType enum: @Enumerated(EnumType.STRING)
+
+    protected Bicycle() {
+    }
 
     public Bicycle(District district, BikeType type) {
         this.district = district;
