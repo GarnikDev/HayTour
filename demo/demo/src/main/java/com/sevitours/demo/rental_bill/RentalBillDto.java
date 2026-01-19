@@ -10,4 +10,7 @@ public class RentalBillDto {
     private Float AdultAmount;
     private Float KidAmount;
     private Float iva;
+
+    public RentalBillDto(RentalBill rentalBill) {
+    }
 }

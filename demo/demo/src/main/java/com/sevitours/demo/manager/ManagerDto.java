@@ -11,4 +11,7 @@ public class ManagerDto {
     private String name;
     private String phone;
     private LocalDate startDate;
+
+    public ManagerDto(Manager manager) {
+    }
 }

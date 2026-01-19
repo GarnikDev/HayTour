@@ -8,9 +8,10 @@ import lombok.Data;
 @Data
 public class Language {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"")
     private Integer id;
 
     @Column(name = "\"Language\"")
-    private String language;
+    private String languageCode;
 }

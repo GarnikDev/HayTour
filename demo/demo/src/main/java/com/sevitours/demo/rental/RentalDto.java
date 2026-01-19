@@ -10,4 +10,7 @@ public class RentalDto {
     private Integer adultCount;
     private Integer kidCount;
     private Timestamp date;
+
+    public RentalDto(Rental rental) {
+    }
 }

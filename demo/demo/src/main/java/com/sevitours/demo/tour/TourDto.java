@@ -12,4 +12,7 @@ public class TourDto {
     private Integer adultCount;
     private Integer kidCount;
     private String type;
+
+    public TourDto(Tour tour) {
+    }
 }

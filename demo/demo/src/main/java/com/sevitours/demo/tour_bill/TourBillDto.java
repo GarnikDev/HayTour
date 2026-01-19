@@ -10,4 +10,7 @@ public class TourBillDto {
     private BigDecimal adultAmount;
     private BigDecimal kidAmount;
     private BigDecimal iva;
+
+    public TourBillDto(TourBill tourBill) {
+    }
 }
