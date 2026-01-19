@@ -13,4 +13,7 @@ public class GuideDto {
     private Integer stars;
     private LocalDate startDate;
     private String idNumber;
+
+    public GuideDto(Guide guide) {
+    }
 }

@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class GetGuideService implements Query<Void, List<GuideDto>> {
 
@@ -20,12 +22,20 @@ public class GetGuideService implements Query<Void, List<GuideDto>> {
     }
 
     @Override
-    public ResponseEntity<List<GuideDto>> execute(Void input){
+    public ResponseEntity<List<GuideDto>> execute(Void input) {
         List<GuideDto> guideDtos = guideRepository.findAll()
                 .stream()
                 .map(guideMapper::toDto)
                 .toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(guideDtos);
+    }
+
+    public ResponseEntity<GuideDto> execute(Integer id) {
+        Optional<Guide> guide = guideRepository.findById(id);
+        if (guide.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(guideMapper.toDto(guide.get()));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 }
