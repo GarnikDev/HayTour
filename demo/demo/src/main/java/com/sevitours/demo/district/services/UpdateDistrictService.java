@@ -1,7 +1,34 @@
 package com.sevitours.demo.district.services;
 
+import com.sevitours.demo.Command;
+import com.sevitours.demo.district.District;
+import com.sevitours.demo.district.DistrictDto;
+import com.sevitours.demo.district.DistrictRepository;
+import com.sevitours.demo.district.UpdateDistrictCommand;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class UpdateDistrictService {
+public class UpdateDistrictService implements Command<UpdateDistrictCommand, DistrictDto> {
+
+    private final DistrictRepository districtRepository;
+
+    public UpdateDistrictService(DistrictRepository districtRepository) {
+        this.districtRepository = districtRepository;
+    }
+
+    @Override
+    public ResponseEntity<DistrictDto> execute(UpdateDistrictCommand command){
+        Optional<District> optionalDistrict = districtRepository.findById(command.getId());
+        if(optionalDistrict.isPresent()){
+            District district = command.getDistrict();
+            district.setId(command.getId());
+            districtRepository.save(district);
+            return ResponseEntity.ok(new DistrictDto(district));
+        }
+
+        return null;
+    }
 }

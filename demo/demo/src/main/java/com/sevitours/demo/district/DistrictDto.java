@@ -10,4 +10,7 @@ public class DistrictDto {
     private DistrictType type;
     private String address;
     private String email;
+
+    public DistrictDto(District district) {
+    }
 }

@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class District {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"", nullable = false)
     private Integer id;
 

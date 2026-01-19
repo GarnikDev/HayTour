@@ -12,7 +12,6 @@ import java.util.Optional;
 public class UpdateBicycleService implements Command<UpdateBicycleCommand, BicycleDto> {
 
     private BicycleRepository bicycleRepository;
-    //private BicycleMapper bicycleMapper;
 
 
     public UpdateBicycleService(BicycleRepository bicycleRepository) {

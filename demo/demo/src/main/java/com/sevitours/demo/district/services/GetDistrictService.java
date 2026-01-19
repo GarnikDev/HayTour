@@ -1,6 +1,8 @@
 package com.sevitours.demo.district.services;
 
 import com.sevitours.demo.Query;
+import com.sevitours.demo.common.enums.DistrictType;
+import com.sevitours.demo.district.District;
 import com.sevitours.demo.district.DistrictDto;
 import com.sevitours.demo.district.DistrictMapper;
 import com.sevitours.demo.district.DistrictRepository;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GetDistrictService implements Query<Void, List<DistrictDto>> {
@@ -30,5 +33,32 @@ public class GetDistrictService implements Query<Void, List<DistrictDto>> {
                 .toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(districtDtos);
+    }
+
+    public ResponseEntity<List<DistrictDto>> execute(String region){// get districts in inputed region
+        List<DistrictDto> districtDtos = districtRepository.findAllByRegion(region)
+                .stream()
+                .map(districtMapper::toDto)
+                .toList();
+
+        return ResponseEntity.status(HttpStatus.OK).body(districtDtos);
+    }
+
+    public ResponseEntity<List<DistrictDto>> execute(DistrictType type){// get districts with inputed type of region
+        List<DistrictDto> districtDtos = districtRepository.findAllByType(type)
+                .stream()
+                .map(districtMapper::toDto)
+                .toList();
+
+        return ResponseEntity.status(HttpStatus.OK).body(districtDtos);
+    }
+
+    public ResponseEntity<DistrictDto> execute(Integer id){// get district by id
+        Optional<District> districtWithId = districtRepository.findById(id);
+        if(districtWithId.isPresent()){
+            return ResponseEntity.status(HttpStatus.OK).body(districtMapper.toDto(districtWithId.get()));
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 }

@@ -1,14 +1,14 @@
+
+
 package com.sevitours.demo.district;
 
+import com.sevitours.demo.common.enums.DistrictType;
 import com.sevitours.demo.district.services.CreateDistrictService;
 import com.sevitours.demo.district.services.DeleteDistrictService;
 import com.sevitours.demo.district.services.GetDistrictService;
 import com.sevitours.demo.district.services.UpdateDistrictService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,9 +32,40 @@ public class DistrictController {
         this.deleteDistrictService = deleteDistrictService;
     }
 
-    @GetMapping
+    @GetMapping("/view")
     public ResponseEntity<List<DistrictDto>> getAllDistricts() {
-        return getDistrictService.execute(null);
+        Void input = null;
+        return getDistrictService.execute(input);
+    }
+
+    @GetMapping("/view/region/{region}")
+    public ResponseEntity<List<DistrictDto>> getAllDistrictsFromRegion(@PathVariable String region){
+        return getDistrictService.execute(region);
+    }
+
+    @GetMapping("/view/type/{type}")
+    public ResponseEntity<List<DistrictDto>> getAllDistrictsWithType(@PathVariable DistrictType type){
+        return getDistrictService.execute(type);
+    }
+
+    @GetMapping("/view/id/{id}")
+    public ResponseEntity<DistrictDto> getDistrictById(@PathVariable Integer id){
+        return getDistrictService.execute(id);
+    }
+
+    @PostMapping("/district")
+    public ResponseEntity<DistrictDto> createDistrict(@RequestBody District district){
+        return createDistrictService.execute(district);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Void> deleteDistrict(@PathVariable Integer id){
+        return deleteDistrictService.execute(id);
+    }
+
+    @PutMapping("edit/{id}")
+    public ResponseEntity<DistrictDto> updateDistrict(@PathVariable Integer id, @RequestBody District district){
+        return updateDistrictService.execute(new UpdateDistrictCommand(id, district));
     }
 
 }
