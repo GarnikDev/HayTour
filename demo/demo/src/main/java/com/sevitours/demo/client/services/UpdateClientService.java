@@ -11,11 +11,9 @@ import java.util.Optional;
 public class UpdateClientService implements Command<UpdateClientCommand, ClientDto> {
 
     private final ClientRepository clientRepository;
-    private final ClientMapper clientMapper;
 
-    public UpdateClientService(ClientRepository clientRepository, ClientMapper clientMapper) {
+    public UpdateClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
-        this.clientMapper = clientMapper;
     }
 
     @Override
@@ -25,8 +23,7 @@ public class UpdateClientService implements Command<UpdateClientCommand, ClientD
             Client client = command.getClient();
             client.setId(command.getId());
             clientRepository.save(client);
-            ClientDto clientDto = clientMapper.toDto(client);
-            return ResponseEntity.ok(clientDto);
+            return ResponseEntity.ok(new ClientDto(client));
         }
         return null;
         //return new ResponseEntity<>(HttpStatus.NOT_FOUND);

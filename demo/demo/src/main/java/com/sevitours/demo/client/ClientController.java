@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/clients")
+@RequestMapping("/clients")
 public class ClientController {
     private final GetClientService getClientService;
     private final CreateClientService createClientService;
@@ -30,29 +30,29 @@ public class ClientController {
         return createClientService.execute(client);
     }
 
-    @GetMapping("/clients/view")
-    public String getAllClients(Model model) {
-        model.addAttribute("clients", getClientService.findAllClients());
-        return "client-list";
+    @GetMapping("/view")
+    public ResponseEntity<List<ClientDto>> getAllClients(Model model) {
+        Void input = null;
+        return getClientService.execute(input);
     }
 
-    @GetMapping("/clients/view/id-{id}")
+    @GetMapping("/view/id/{id}")
     public ResponseEntity<ClientDto> getClient(@PathVariable Integer id) {
         return getClientService.execute(id);
     }
 
-    @GetMapping("/clients/view/name-{name}")
+    @GetMapping("/view/name/{name}")
     public ResponseEntity<List<ClientDto>> getClientByName(@PathVariable String name) {
         return getClientService.execute(name);
     }
 
-    @PutMapping("/clients/edit/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<ClientDto> updateClient(@PathVariable Integer id, @RequestBody Client client) {
         getClientService.execute(id);
         return updateClientService.execute(new UpdateClientCommand(id, client));
     }
 
-    @DeleteMapping("/clients/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
         return deleteClientService.execute(id);
     }

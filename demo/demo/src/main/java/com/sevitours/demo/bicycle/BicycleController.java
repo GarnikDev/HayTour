@@ -52,7 +52,7 @@ public class BicycleController {
         return getBicycleService.execute(type);
     }
 
-    @PutMapping("/put/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<BicycleDto> updateBicycle(@PathVariable Integer id, @RequestBody Bicycle bicycle) {
         return updateBicycleService.execute(new UpdateBicycleCommand(bicycle, id));
     }

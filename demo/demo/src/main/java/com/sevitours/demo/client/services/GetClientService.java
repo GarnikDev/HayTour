@@ -25,7 +25,7 @@ public class GetClientService implements Query<Void, List<ClientDto>> {
 
 
     @Override
-    public ResponseEntity<List<ClientDto>> execute(Void input) {
+    public ResponseEntity<List<ClientDto>> execute(Void input) { // returns All existing clients
         List<ClientDto> clientDto = clientRepository.findAll()
                 .stream()
                 .map(clientMapper::toDto)
@@ -34,17 +34,8 @@ public class GetClientService implements Query<Void, List<ClientDto>> {
         return ResponseEntity.status(HttpStatus.OK).body(clientDto);
     }
 
-    public List<ClientDto> findAllClients() {
-        List<ClientDto> clientDto = clientRepository.findAll()
-                .stream()
-                .map(clientMapper::toDto)
-                .toList();
 
-        return clientDto;
-    }
-
-
-    public ResponseEntity<ClientDto> execute(Integer id) {
+    public ResponseEntity<ClientDto> execute(Integer id) { // Returns the client with inputed id
         Optional<Client> client = clientRepository.findById(id);
         if (client.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(clientMapper.toDto(client.get()));
@@ -53,7 +44,7 @@ public class GetClientService implements Query<Void, List<ClientDto>> {
         }
     }
 
-    public ResponseEntity<List<ClientDto>> execute(String input) {
+    public ResponseEntity<List<ClientDto>> execute(String input) {// Returns all the clients with inputed name
         List<Client> clientsWithName = clientRepository.findByName(input);
 
         /*

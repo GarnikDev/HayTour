@@ -10,4 +10,7 @@ public class ClientDto {
     private String phone;
     private String country;
     private String language;
+
+    public ClientDto(Client client) {
+    }
 }

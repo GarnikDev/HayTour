@@ -17,6 +17,7 @@ public class DeleteClientService implements Command<Integer, Void>{
     private ClientRepository clientRepository;
 
     public DeleteClientService(ClientRepository clientRepository) {
+
         this.clientRepository = clientRepository;
     }
 
