@@ -2,6 +2,7 @@ package com.sevitours.demo.rental;
 
 import lombok.Data;
 import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 
 @Data
 public class RentalDto {
@@ -9,7 +10,7 @@ public class RentalDto {
     private Integer duration;
     private Integer adultCount;
     private Integer kidCount;
-    private Timestamp date;
+    private OffsetDateTime time;
 
     public RentalDto(Rental rental) {
     }

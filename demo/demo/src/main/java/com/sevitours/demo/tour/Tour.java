@@ -15,6 +15,7 @@ import java.util.List;
 @Data
 public class Tour {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"")
     private Integer id;
 

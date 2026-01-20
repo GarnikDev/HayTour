@@ -31,7 +31,7 @@ public class BicycleController {
         this.deleteBicycleService = deleteBicycleService;
     }
 
-    @PostMapping("/post")
+    @PostMapping("/bicycle")
     public ResponseEntity<BicycleDto> createBicycle(@RequestBody Bicycle bicycle) {
         return createBicycleService.execute(bicycle);
     }

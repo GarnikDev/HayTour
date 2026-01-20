@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Data
 public class Manager {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"")
     private Integer id;
 
@@ -23,6 +24,9 @@ public class Manager {
 
     @Column(name = "\"Name\"")
     private String name;
+
+    @Column(name = "\"Email\"")
+    private String email;
 
     @Column(name = "\"Phone\"")
     private String phone;

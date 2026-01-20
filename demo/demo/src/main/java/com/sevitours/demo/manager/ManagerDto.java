@@ -9,6 +9,7 @@ public class ManagerDto {
     private Integer districtId;
     private String idNumber;
     private String name;
+    private String email;
     private String phone;
     private LocalDate startDate;
 

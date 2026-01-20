@@ -17,9 +17,11 @@ public class RentalBillController {
     public RentalBillController(GetRentalBillService getRentalBillService) {
         this.getRentalBillService = getRentalBillService;
     }
-
+    /*
     @GetMapping
     public ResponseEntity<List<RentalBillDto>> getAllRentalBills(){
         return getRentalBillService.execute(null);
     }
+    */
+
 }
