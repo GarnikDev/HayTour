@@ -2,7 +2,6 @@ package com.sevitours.demo.bicycle.services;
 
 import com.sevitours.demo.Command;
 import com.sevitours.demo.bicycle.*;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

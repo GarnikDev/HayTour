@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public class UpdateRentalBillCommand {
-    private RentalBill_Id id;
+    private Integer id;
     private RentalBill rentalBill;
 
-    public UpdateRentalBillCommand(RentalBill_Id id, RentalBill rentalBill) {
+    public UpdateRentalBillCommand(Integer id, RentalBill rentalBill) {
         this.id = id;
         this.rentalBill = rentalBill;
     }

@@ -1,11 +1,8 @@
 package com.sevitours.demo.tour;
 
-import com.sevitours.demo.rental_bill.services.GetRentalBillService;
-import com.sevitours.demo.tour.services.GetTourService;
+import com.sevitours.demo.tour.services.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,14 +10,44 @@ import java.util.List;
 @RequestMapping("/tours")
 public class TourController {
 
-    private final GetTourService getTourService;
+    private final CreateTourService createService;
+    private final GetTourService getService;
+    private final UpdateTourService updateService;
+    private final DeleteTourService deleteService;
 
-    public TourController(GetTourService getTourService) {
-        this.getTourService = getTourService;
+    public TourController(CreateTourService createService,
+                          GetTourService getService,
+                          UpdateTourService updateService,
+                          DeleteTourService deleteService) {
+        this.createService = createService;
+        this.getService = getService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<TourDto>> getAllTours(){
-        return getTourService.execute(null);
+    @PostMapping("/tour")
+    public ResponseEntity<TourDto> create(@RequestBody Tour tour) {
+        return createService.execute(tour);
+    }
+
+    @GetMapping("/view")
+    public ResponseEntity<List<TourDto>> getAll() {
+        Void input = null;
+        return getService.execute(input);
+    }
+
+    @GetMapping("/view/id/{id}")
+    public ResponseEntity<TourDto> getById(@PathVariable Integer id) {
+        return getService.execute(id);
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<TourDto> update(@PathVariable Integer id, @RequestBody Tour tour) {
+        return updateService.execute(new UpdateTourCommand(id, tour));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        return deleteService.execute(id);
     }
 }

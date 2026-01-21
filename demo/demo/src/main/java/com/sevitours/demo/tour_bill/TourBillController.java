@@ -1,25 +1,48 @@
 package com.sevitours.demo.tour_bill;
 
-import com.sevitours.demo.tour_bill.services.GetTourBillService;
+import com.sevitours.demo.tour_bill.services.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/tourbills")
+@RequestMapping("/tour-bills")
 public class TourBillController {
 
-    private final GetTourBillService getTourBillService;
+    private final CreateTourBillService createService;
+    private final GetTourBillService getService;
+    private final UpdateTourBillService updateService;
+    private final DeleteTourBillService deleteService;
 
-    public TourBillController(GetTourBillService getTourBillService) {
-        this.getTourBillService = getTourBillService;
+    public TourBillController(CreateTourBillService createService,
+                              GetTourBillService getService,
+                              UpdateTourBillService updateService,
+                              DeleteTourBillService deleteService) {
+        this.createService = createService;
+        this.getService = getService;
+        this.updateService = updateService;
+        this.deleteService = deleteService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<TourBillDto>> getAllTour(){
-        return getTourBillService.execute(null);
+    @PostMapping("/tour-bill")
+    public ResponseEntity<TourBillDto> create(@RequestBody TourBill bill) {
+        return createService.execute(bill);
+    }
+
+    @GetMapping("/view")
+    public ResponseEntity<List<TourBillDto>> getAll() {
+        Void input = null;
+        return getService.execute(input);
+    }
+
+    @PutMapping("/edit")
+    public ResponseEntity<TourBillDto> update(@RequestBody UpdateTourBillCommand command) {
+        return updateService.execute(command);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> delete(@RequestBody Integer id) {
+        return deleteService.execute(id);
     }
 }
