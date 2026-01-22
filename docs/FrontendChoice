@@ -1,0 +1,7 @@
+I chose React as frontend technology for several reasons:
+
+1. I already have basic knoledge of React.
+2. React helps to have fully separated frontend environment.
+3. It's fully compatible with Spring.
+4. It has a very big range of libraries.
+5. (Maybe the most important point) it allows to have minimal logic directly from the frontend code itself.
