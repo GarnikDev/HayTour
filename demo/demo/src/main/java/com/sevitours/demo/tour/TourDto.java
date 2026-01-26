@@ -2,12 +2,12 @@ package com.sevitours.demo.tour;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 
 @Data
 public class TourDto {
     private Integer id;
-    private Timestamp time;
+    private OffsetDateTime time;
     private Integer guideId;
     private Integer adultCount;
     private Integer kidCount;

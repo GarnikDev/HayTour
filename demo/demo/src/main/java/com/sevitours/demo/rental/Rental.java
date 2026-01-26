@@ -28,10 +28,4 @@ public class Rental {
 
     @Column(name = "\"Kid_count\"")
     private Integer kidCount;
-
-    @ManyToMany
-    @JoinTable(name = "\"Rental_Bike\"",
-            joinColumns = @JoinColumn(name = "\"Rental_id\""),
-            inverseJoinColumns = @JoinColumn(name = "\"Bicycle_id\""))
-    private List<Bicycle> bicycles;
 }
