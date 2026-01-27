@@ -1,6 +1,7 @@
 package com.sevitours.demo.bicycle;
 
 import com.sevitours.demo.common.enums.BikeType;
+import com.sevitours.demo.common.enums.Condition;
 import com.sevitours.demo.district.District;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,7 +21,12 @@ public class Bicycle {
 
     @Column(name = "\"Type\"", nullable = false)
     @Enumerated(EnumType.STRING)
-    private BikeType type;  // Or BikeType enum: @Enumerated(EnumType.STRING)
+    private BikeType type;
+
+    @Column(name = "\"condition\"", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Condition condition;
+
 
     protected Bicycle() {
     }

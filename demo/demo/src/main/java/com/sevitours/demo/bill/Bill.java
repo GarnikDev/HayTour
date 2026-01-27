@@ -9,6 +9,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
+import java.time.OffsetDateTime;
+
 @Entity
 @Table(name = "\"Bill\"")
 @Data
@@ -31,7 +33,7 @@ public class Bill {
 
     @Column(name = "\"source_type\"", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Source source;
+    private Source sourceType;
 
     @Column(name = "\"source_id\"", nullable = false)
     private Long sourceId;
@@ -42,4 +44,7 @@ public class Bill {
     @Column(name = "\"currency\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private Currency currency;
+
+    @Column(name = "\"created_at\"", nullable = false)
+    private OffsetDateTime created_at;
 }
