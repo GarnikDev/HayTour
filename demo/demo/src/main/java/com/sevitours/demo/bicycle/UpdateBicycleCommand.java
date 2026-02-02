@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public class UpdateBicycleCommand {
-    private Integer id;
+    private Long id;
     private Bicycle bicycle;
 
-    public UpdateBicycleCommand(Bicycle bicycle, Integer id) {
+    public UpdateBicycleCommand(Bicycle bicycle, Long id) {
         this.bicycle = bicycle;
         this.id = id;
     }

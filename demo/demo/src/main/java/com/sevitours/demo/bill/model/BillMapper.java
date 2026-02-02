@@ -1,4 +1,4 @@
-package com.sevitours.demo.bill;
+package com.sevitours.demo.bill.model;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

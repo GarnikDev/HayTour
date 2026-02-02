@@ -1,4 +1,4 @@
-package com.sevitours.demo.bill;
+package com.sevitours.demo.bill.model;
 
 
 import com.sevitours.demo.bill.enums.Currency;

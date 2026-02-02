@@ -1,7 +1,7 @@
-package com.sevitours.demo.bill.services;
+package com.sevitours.demo.bill.service;
 
 import com.sevitours.demo.Query;
-import com.sevitours.demo.bill.BillDto;
+import com.sevitours.demo.bill.model.BillDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

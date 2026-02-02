@@ -1,4 +1,4 @@
-package com.sevitours.demo.bill.services;
+package com.sevitours.demo.bill.service;
 
 import com.sevitours.demo.bicycle.BicycleMapper;
 import com.sevitours.demo.bicycle.BicycleRepository;

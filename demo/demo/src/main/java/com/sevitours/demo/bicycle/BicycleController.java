@@ -43,7 +43,7 @@ public class BicycleController {
     }
 
     @GetMapping("/view/id/{id}")
-    public ResponseEntity<BicycleDto> getBicycleById(@PathVariable Integer id) {
+    public ResponseEntity<BicycleDto> getBicycleById(@PathVariable Long id) {
         return getBicycleService.execute(id);
     }
 
@@ -53,12 +53,12 @@ public class BicycleController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<BicycleDto> updateBicycle(@PathVariable Integer id, @RequestBody Bicycle bicycle) {
+    public ResponseEntity<BicycleDto> updateBicycle(@PathVariable Long id, @RequestBody Bicycle bicycle) {
         return updateBicycleService.execute(new UpdateBicycleCommand(bicycle, id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBicycle(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteBicycle(@PathVariable Long id) {
         return deleteBicycleService.execute(id);
     }
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class DeleteBicycleService implements Command<Integer, Void> {
+public class DeleteBicycleService implements Command<Long, Void> {
 
     private BicycleRepository bicycleRepository;
 
@@ -19,7 +19,7 @@ public class DeleteBicycleService implements Command<Integer, Void> {
     }
 
     @Override
-    public ResponseEntity<Void> execute(Integer id) {
+    public ResponseEntity<Void> execute(Long id) {
 
         Optional<Bicycle> optionalBicycle = bicycleRepository.findById(id);
         if(optionalBicycle.isPresent()) {

@@ -1,4 +1,5 @@
-package com.sevitours.demo.bill;
+package com.sevitours.demo.bill.service;
+import com.sevitours.demo.bill.model.Bill;
 import lombok.Getter;
 
 @Getter

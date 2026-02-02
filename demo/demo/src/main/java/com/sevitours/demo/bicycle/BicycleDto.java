@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 public class BicycleDto {
-    private Integer id;
-    private Integer districtId;
+    private Long id;
+    private Long districtId;
     private BikeType type;
     private Condition condition;
 

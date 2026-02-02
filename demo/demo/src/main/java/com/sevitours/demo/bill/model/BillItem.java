@@ -1,8 +1,7 @@
-package com.sevitours.demo.bill;
+package com.sevitours.demo.bill.model;
 
 
 import com.sevitours.demo.bill.enums.Billing;
-import com.sevitours.demo.common.enums.BikeType;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.Id;

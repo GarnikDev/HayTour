@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BicycleRepository extends JpaRepository<Bicycle, Integer> {
+public interface BicycleRepository extends JpaRepository<Bicycle, Long> {
     List<Bicycle> findAllByType(BikeType type);
 }

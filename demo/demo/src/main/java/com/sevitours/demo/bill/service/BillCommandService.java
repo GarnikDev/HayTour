@@ -1,8 +1,8 @@
-package com.sevitours.demo.bill.services;
+package com.sevitours.demo.bill.service;
 
 import com.sevitours.demo.Command;
-import com.sevitours.demo.bill.Bill;
-import com.sevitours.demo.bill.BillDto;
+import com.sevitours.demo.bill.model.Bill;
+import com.sevitours.demo.bill.model.BillDto;
 import org.springframework.http.ResponseEntity;
 
 public class BillCommandService implements Command<Bill, BillDto> {

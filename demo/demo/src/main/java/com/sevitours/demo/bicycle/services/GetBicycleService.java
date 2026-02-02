@@ -32,7 +32,7 @@ public class GetBicycleService implements Query<Void, List<BicycleDto>> {
         return ResponseEntity.status(HttpStatus.OK).body(bicyclesDto);
     }
 
-    public ResponseEntity<BicycleDto> execute(Integer input){ // Get bicycle by ID
+    public ResponseEntity<BicycleDto> execute(Long input){ // Get bicycle by ID
         Optional<Bicycle> bicycleOptional = bicycleRepository.findById(input);
         if (bicycleOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(bicycleMapper.toDto(bicycleOptional.get()));
