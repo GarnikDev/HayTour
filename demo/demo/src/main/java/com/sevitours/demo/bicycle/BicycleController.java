@@ -2,9 +2,6 @@ package com.sevitours.demo.bicycle;
 
 import com.sevitours.demo.bicycle.services.*;
 import com.sevitours.demo.common.enums.BikeType;
-import com.sevitours.demo.district.District;
-import com.sevitours.demo.district.DistrictController;
-import com.sevitours.demo.district.services.GetDistrictService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

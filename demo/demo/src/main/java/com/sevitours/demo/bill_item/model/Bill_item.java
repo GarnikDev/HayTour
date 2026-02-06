@@ -1,17 +1,17 @@
-package com.sevitours.demo.bill.model;
+package com.sevitours.demo.bill_item.model;
 
 
-import com.sevitours.demo.bill.enums.Billing;
+import com.sevitours.demo.bill_item.enums.Billing;
+import com.sevitours.demo.bill.model.Bill;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "\"Bill_item\"")
 @Data
-public class BillItem {
+public class Bill_item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

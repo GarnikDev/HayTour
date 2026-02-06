@@ -1,13 +1,11 @@
 package com.sevitours.demo.bill.model;
 
-
 import com.sevitours.demo.bill.enums.Currency;
 import com.sevitours.demo.bill.enums.Source;
 import com.sevitours.demo.bill.enums.Status;
 import com.sevitours.demo.client.Client;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.time.OffsetDateTime;
 
