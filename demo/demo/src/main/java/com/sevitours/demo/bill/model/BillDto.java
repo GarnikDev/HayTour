@@ -20,13 +20,15 @@ public class BillDto {
     private OffsetDateTime created_at;
 
     public BillDto(Bill bill) {
-        this.id = bill.getId();
-        this.subtotal = bill.getSubtotal();
-        this.status = bill.getStatus();
-        this.sourceType = bill.getSourceType();
-        this.sourceId = bill.getSourceId();
-        this.clientId = bill.getClient().getId();
-        this.currency = bill.getCurrency();
-        this.created_at = bill.getCreated_at();
+        if(bill != null) {
+            this.id = bill.getId();
+            this.subtotal = bill.getSubtotal();
+            this.status = bill.getStatus();
+            this.sourceType = bill.getSourceType();
+            this.sourceId = bill.getSourceId();
+            this.clientId = bill.getClient().getId();
+            this.currency = bill.getCurrency();
+            this.created_at = bill.getCreated_at();
+        }
     }
 }

@@ -25,21 +25,22 @@ public class Bill {
     @Column(name = "\"subtotal\"", nullable = false)
     private Double subtotal;
 
-    @Column(name = "\"status\"", nullable = false)
+    @Column(name = "\"status\"", nullable = false, columnDefinition = "status_type")
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column(name = "\"source_type\"", nullable = false)
+    @Column(name = "\"source_type\"", nullable = false, columnDefinition = "source_type")
     @Enumerated(EnumType.STRING)
     private Source sourceType;
 
     @Column(name = "\"source_id\"", nullable = false)
     private Long sourceId;
 
-    @Column(name = "\"client_id\"", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    @Column(name = "\"currency\"", nullable = false)
+    @Column(name = "\"currency\"", nullable = false, columnDefinition = "currency")
     @Enumerated(EnumType.STRING)
     private Currency currency;
 

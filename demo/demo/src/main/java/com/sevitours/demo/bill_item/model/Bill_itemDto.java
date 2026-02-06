@@ -19,14 +19,16 @@ public class Bill_itemDto {
     private Billing billing;
 
     public Bill_itemDto(Bill_item billitem) {
-        this.id = billitem.getId();
-        this.bill_id = billitem.getBill().getId();
-        this.quantity = billitem.getQuantity();
-        this.description = billitem.getDescription();
-        this.unitPrice = billitem.getUnitPrice();
-        this.amount = billitem.getAmount();
-        this.refundable = billitem.getRefundable();
-        this.createdAt = billitem.getCreatedAt();
-        this.billing = billitem.getBilling();
+        if(billitem != null){
+            this.id = billitem.getId();
+            this.bill_id = billitem.getBill().getId();
+            this.quantity = billitem.getQuantity();
+            this.description = billitem.getDescription();
+            this.unitPrice = billitem.getUnitPrice();
+            this.amount = billitem.getAmount();
+            this.refundable = billitem.getRefundable();
+            this.createdAt = billitem.getCreatedAt();
+            this.billing = billitem.getBilling();
+        }
     }
 }

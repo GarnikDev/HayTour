@@ -5,6 +5,7 @@ import com.sevitours.demo.common.enums.Condition;
 import com.sevitours.demo.district.District;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "\"Bicycle\"")  // Quoted for case-sensitivity
@@ -19,14 +20,13 @@ public class Bicycle {
     @JoinColumn(name = "\"District_id\"", nullable = false)
     private District district;
 
-    @Column(name = "\"Type\"", nullable = false)
+    @Column(name = "\"Type\"", nullable = false, columnDefinition = "bike_types")
     @Enumerated(EnumType.STRING)
     private BikeType type;
 
-    @Column(name = "\"condition\"", nullable = false)
+    @Column(name = "\"condition\"", nullable = false, columnDefinition = "bike_condition")
     @Enumerated(EnumType.STRING)
     private Condition condition;
-
 
     protected Bicycle() {
     }

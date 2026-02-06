@@ -26,12 +26,6 @@ public class Tour {
     @JoinColumn(name = "\"Guide_id\"", nullable = false)
     private Guide guide;
 
-    @Column(name = "\"Adult_count\"")
-    private Integer adultCount;
-
-    @Column(name = "\"Kid_count\"")
-    private Integer kidCount;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "\"Type\"")
     private TourType type;  // Or TourType enum

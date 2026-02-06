@@ -18,7 +18,8 @@ public class Bill_item {
     @Column(name = "\"id\"", nullable = false)
     private Long id;
 
-    @Column(name = "\"bill_id\"", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bill_id", nullable = false)
     private Bill bill;
 
     @Column(name = "\"quantity\"", nullable = false)
@@ -39,7 +40,7 @@ public class Bill_item {
     @Column(name = "\"created_at\"", nullable = false)
     private OffsetDateTime createdAt;
 
-    @Column(name = "\"type\"", nullable = false)
+    @Column(name = "\"type\"", nullable = false, columnDefinition = "pricing_type")
     @Enumerated(EnumType.STRING)
     private Billing billing;
 
