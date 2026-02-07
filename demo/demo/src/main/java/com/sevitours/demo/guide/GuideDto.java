@@ -15,5 +15,15 @@ public class GuideDto {
     private String idNumber;
 
     public GuideDto(Guide guide) {
+        if(guide != null){
+            this.id = guide.getId();
+            this.districtId = guide.getDistrict().getId();
+            this.name = guide.getName();
+            this.email = guide.getEmail();
+            this.phone = guide.getPhone();
+            this.stars = guide.getStars();
+            this.startDate = guide.getStartDate();
+            this.idNumber = guide.getIdNumber();
+        }
     }
 }

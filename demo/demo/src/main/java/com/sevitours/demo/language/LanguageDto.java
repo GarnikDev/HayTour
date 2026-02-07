@@ -8,5 +8,9 @@ public class LanguageDto {
     private String languageCode;
 
     public LanguageDto(Language language) {
+        if(language != null){
+            this.id = language.getId();
+            this.languageCode = language.getLanguageCode();
+        }
     }
 }

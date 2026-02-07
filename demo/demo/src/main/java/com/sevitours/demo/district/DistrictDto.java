@@ -12,5 +12,11 @@ public class DistrictDto {
     private String email;
 
     public DistrictDto(District district) {
+        if(district != null){
+            this.id = district.getId();
+            this.region = district.getRegion();
+            this.type = district.getType();
+            this.address = district.getAddress();
+        }
     }
 }

@@ -14,5 +14,14 @@ public class ManagerDto {
     private LocalDate startDate;
 
     public ManagerDto(Manager manager) {
+        if(manager != null){
+            this.id = manager.getId();
+            this.districtId = manager.getDistrict().getId();
+            this.idNumber = manager.getIdNumber();
+            this.name = manager.getName();
+            this.email = manager.getEmail();
+            this.phone = manager.getPhone();
+            this.startDate = manager.getStartDate();
+        }
     }
 }
