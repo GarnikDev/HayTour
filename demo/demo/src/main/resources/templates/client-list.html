@@ -13,7 +13,7 @@
         </div>
         <div class="col-8">
 
-            <a class = "btn btn-info" th:href="@{/clients/client-form}">Crear perfil de cliente</a>
+            <a class = "btn btn-info" th:href="@{/clients/client-form}">Nuevo cliente</a>
 
             <table class="table">
                 <thead>
@@ -29,15 +29,13 @@
                 </thead>
                 <tbody>
                 <tr th:each="client: ${clients}">
-                    <th scope="row"> th:text="${client.id}"></th>
+                    <th scope="row" th:text="${client.id}"></th>
                     <td th:text="${client.name}"></td>
                     <td th:text="${client.email}"></td>
                     <td th:text="${client.phone}"></td>
                     <td th:text="${client.country}"></td>
                     <td th:text="${client.language}"></td>
                     <td>
-                        <a class = "btn btn-primary" th:href="@{/clients/view}">Ver lista de clientes</a>
-                        <a class = "btn btn-primary" th:href="@{/clients/view/id/{id}(id = ${client.id})}">Ver datos del cliente</a>
                         <a class = "btn btn-success" th:href="@{/clients/edit/{id}(id = ${client.id})}">Editar datos del cliente</a>
                         <a class = "btn btn-danger" th:href="@{/clients/delete/{id}(id = ${client.id})}">Borrar el perfil del cliente</a>
                     </td>

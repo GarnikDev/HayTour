@@ -18,17 +18,20 @@ public class ClientController {
     private final DeleteClientService deleteClientService;
     private final UpdateClientService updateClientService;
     private final LanguageRepository languageRepository;
+    private final ClientRepository clientRepository;
 
     public ClientController(GetClientService getClientService,
                             CreateClientService createClientService,
                             DeleteClientService deleteClientService,
                             UpdateClientService updateClientService,
-                            LanguageRepository languageRepository) {
+                            LanguageRepository languageRepository,
+                            ClientRepository clientRepository) {
         this.getClientService = getClientService;
         this.createClientService = createClientService;
         this.deleteClientService = deleteClientService;
         this.updateClientService = updateClientService;
         this.languageRepository = languageRepository;
+        this.clientRepository = clientRepository;
     }
 
     @PostMapping("/client") // Will probably need to be improved in order to ensure the district with the id exists
@@ -57,6 +60,17 @@ public class ClientController {
     @GetMapping("/view/form")
     public String viewForm(Model model) {
         return getClientService.formulario(model);
+    }
+
+    @ModelAttribute("clients")
+    public List<Client> clients() {
+        List<Client> clients = clientRepository.findAll();
+        return  clients;
+    }
+
+    @GetMapping("/list")
+    public String listClients(Model model) {
+        return  getClientService.listClients(model);
     }
 
     @GetMapping("/view")

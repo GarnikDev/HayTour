@@ -43,6 +43,12 @@ public class GetClientService implements Query<Void, List<ClientDto>> {
         return ResponseEntity.status(HttpStatus.OK).body(clientDto);
     }
 
+    //UI List
+    public String listClients(Model model) {
+        model.addAttribute("clients", clientRepository.findAll());
+        return "client-list";
+    }
+
 
     //testing method
 
