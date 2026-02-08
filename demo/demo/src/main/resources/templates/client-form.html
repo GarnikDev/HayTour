@@ -12,29 +12,36 @@
 
         </div>
         <div class="col">
-            <form th:action="@{/client}" method="POST" th:object="${client}">
+            <form action="#" th:action="@{/clients/client-form}" method="POST" th:object="${client}">
 
                 <input type="hidden" th:field="*{id}"/>
 
                 <div class="mb-3">
-                    <label for="exampleInputName1" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="exampleInputName1" th:field="*{name}">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{email}">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="text" class="form-control" id="email" th:field="*{email}">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPhone1" class="form-label">Phone</label>
-                    <input type="text" class="form-control" id="exampleInputPhone1" th:field="*{phone}">
+                    <label for="tel" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="tel" th:field="*{phone}">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputCountry1" class="form-label">Country</label>
-                    <input type="text" class="form-control" id="exampleInputCountry1" th:field="*{country}">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" class="form-control" id="country" th:field="*{country}">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputLanguage1" class="form-label">Language</label>
-                    <input type="text" class="form-control" id="exampleInputLanguage1" th:field="*{language}">
+                    <label for="language" class="form-label">Language</label>
+                    <select class="form-control" id="language" th:field="*{language}">
+                        <option value="-1">---</option>
+                        <option th:each="language : ${languages}"
+                                th:value="${language.id}"
+                                th:text="${language.languageCode}">
+                        </option>
+                    </select>
+
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

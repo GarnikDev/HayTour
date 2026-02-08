@@ -5,9 +5,14 @@ import com.sevitours.demo.client.Client;
 import com.sevitours.demo.client.ClientDto;
 import com.sevitours.demo.client.ClientMapper;
 import com.sevitours.demo.client.ClientRepository;
+import com.sevitours.demo.language.Language;
+import com.sevitours.demo.language.LanguageRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +21,15 @@ public class GetClientService implements Query<Void, List<ClientDto>> {
 
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
+    private final LanguageRepository languageRepository;
+
 
     public GetClientService(ClientRepository clientRepository,
-                            ClientMapper clientMapper) {
+                            ClientMapper clientMapper,
+                            LanguageRepository languageRepository) {
         this.clientRepository = clientRepository;
         this.clientMapper = clientMapper;
+        this.languageRepository = languageRepository;
     }
 
 
@@ -32,6 +41,14 @@ public class GetClientService implements Query<Void, List<ClientDto>> {
                 .toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(clientDto);
+    }
+
+
+    //testing method
+
+    public String formulario(Model model) { // returns All existing clients
+        model.addAttribute("client", new Client());
+        return "client-form.html";
     }
 
 
