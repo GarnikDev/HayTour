@@ -1,7 +1,9 @@
 package com.sevitours.demo.client.services;
 
 import com.sevitours.demo.Command;
-import com.sevitours.demo.client.*;
+import com.sevitours.demo.client.model.Client;
+import com.sevitours.demo.client.model.ClientDto;
+import com.sevitours.demo.client.repo.ClientRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

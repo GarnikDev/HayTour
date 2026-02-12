@@ -1,7 +1,9 @@
 package com.sevitours.demo.tour.services;
 
 import com.sevitours.demo.Command;
-import com.sevitours.demo.tour.*;
+import com.sevitours.demo.tour.model.Tour;
+import com.sevitours.demo.tour.model.TourDto;
+import com.sevitours.demo.tour.repo.TourRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

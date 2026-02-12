@@ -1,9 +1,9 @@
 package com.sevitours.demo.bill.model;
 
 import com.sevitours.demo.bill.enums.Currency;
-import com.sevitours.demo.bill.enums.Source;
+import com.sevitours.demo.common.enums.Source;
 import com.sevitours.demo.bill.enums.Status;
-import com.sevitours.demo.client.Client;
+import com.sevitours.demo.client.model.Client;
 import jakarta.persistence.*;
 import lombok.Data;
 

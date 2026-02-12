@@ -1,7 +1,7 @@
 package com.sevitours.demo.bill.model;
 
 import com.sevitours.demo.bill.enums.Currency;
-import com.sevitours.demo.bill.enums.Source;
+import com.sevitours.demo.common.enums.Source;
 import com.sevitours.demo.bill.enums.Status;
 import lombok.Data;
 

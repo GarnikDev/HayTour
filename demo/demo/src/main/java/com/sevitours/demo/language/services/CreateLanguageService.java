@@ -1,7 +1,9 @@
 package com.sevitours.demo.language.services;
 
 import com.sevitours.demo.Command;
-import com.sevitours.demo.language.*;
+import com.sevitours.demo.language.model.Language;
+import com.sevitours.demo.language.model.LanguageDto;
+import com.sevitours.demo.language.repo.LanguageRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

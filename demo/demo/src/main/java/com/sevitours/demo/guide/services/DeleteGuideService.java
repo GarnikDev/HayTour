@@ -1,8 +1,8 @@
 package com.sevitours.demo.guide.services;
 
 import com.sevitours.demo.Command;
-import com.sevitours.demo.guide.Guide;
-import com.sevitours.demo.guide.GuideRepository;
+import com.sevitours.demo.guide.model.Guide;
+import com.sevitours.demo.guide.repo.GuideRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,7 @@ package com.sevitours.demo.bill_item.service;
 import com.sevitours.demo.bill_item.model.Bill_item;
 import com.sevitours.demo.bill_item.model.Bill_itemDto;
 import com.sevitours.demo.bill_item.model.Bill_itemMapper;
-import com.sevitours.demo.bill_item.repos.Bill_itemRepository;
+import com.sevitours.demo.bill_item.repo.Bill_itemRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

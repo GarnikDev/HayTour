@@ -1,11 +1,11 @@
 package com.sevitours.demo.district.services;
 
 import com.sevitours.demo.Query;
-import com.sevitours.demo.common.enums.DistrictType;
-import com.sevitours.demo.district.District;
-import com.sevitours.demo.district.DistrictDto;
-import com.sevitours.demo.district.DistrictMapper;
-import com.sevitours.demo.district.DistrictRepository;
+import com.sevitours.demo.district.enums.DistrictType;
+import com.sevitours.demo.district.model.District;
+import com.sevitours.demo.district.model.DistrictDto;
+import com.sevitours.demo.district.model.DistrictMapper;
+import com.sevitours.demo.district.repo.DistrictRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,9 @@
 package com.sevitours.demo.rental.services;
 
 import com.sevitours.demo.Command;
-import com.sevitours.demo.rental.*;
+import com.sevitours.demo.rental.model.Rental;
+import com.sevitours.demo.rental.model.RentalDto;
+import com.sevitours.demo.rental.repo.RentalRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

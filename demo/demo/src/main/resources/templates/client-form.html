@@ -37,7 +37,7 @@
                     <select class="form-control" id="language" th:field="*{language}">
                         <option value="-1">---</option>
                         <option th:each="language : ${languages}"
-                                th:value="${language.id}"
+                                th:value="${language.languageCode}"
                                 th:text="${language.languageCode}">
                         </option>
                     </select>

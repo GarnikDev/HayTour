@@ -1,8 +1,8 @@
 package com.sevitours.demo.manager.services;
 
 import com.sevitours.demo.Command;
-import com.sevitours.demo.manager.Manager;
-import com.sevitours.demo.manager.ManagerRepository;
+import com.sevitours.demo.manager.model.Manager;
+import com.sevitours.demo.manager.repo.ManagerRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

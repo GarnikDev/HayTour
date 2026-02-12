@@ -1,17 +1,15 @@
 package com.sevitours.demo.client.services;
 
 import com.sevitours.demo.Query;
-import com.sevitours.demo.client.Client;
-import com.sevitours.demo.client.ClientDto;
-import com.sevitours.demo.client.ClientMapper;
-import com.sevitours.demo.client.ClientRepository;
-import com.sevitours.demo.language.Language;
-import com.sevitours.demo.language.LanguageRepository;
+import com.sevitours.demo.client.model.Client;
+import com.sevitours.demo.client.model.ClientDto;
+import com.sevitours.demo.client.model.ClientMapper;
+import com.sevitours.demo.client.repo.ClientRepository;
+import com.sevitours.demo.language.repo.LanguageRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 import java.util.Optional;
