@@ -40,7 +40,7 @@ public class Bill_item {
     @Column(name = "\"created_at\"", nullable = false)
     private OffsetDateTime createdAt;
 
-    @Column(name = "\"type\"", nullable = false, columnDefinition = "pricing_type")
+    @Column(name = "\"type\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private Billing billing;
 

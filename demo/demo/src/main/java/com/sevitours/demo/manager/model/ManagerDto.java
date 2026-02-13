@@ -1,5 +1,6 @@
 package com.sevitours.demo.manager.model;
 
+import com.sevitours.demo.user.model.AppUser;
 import lombok.Data;
 import java.time.LocalDate;
 
@@ -7,21 +8,15 @@ import java.time.LocalDate;
 public class ManagerDto {
     private Integer id;
     private Integer districtId;
-    private String idNumber;
-    private String name;
-    private String email;
-    private String phone;
     private LocalDate startDate;
+    private AppUser user;
 
     public ManagerDto(Manager manager) {
         if(manager != null){
             this.id = manager.getId();
             this.districtId = manager.getDistrict().getId();
-            this.idNumber = manager.getIdNumber();
-            this.name = manager.getName();
-            this.email = manager.getEmail();
-            this.phone = manager.getPhone();
             this.startDate = manager.getStartDate();
+            this.user = manager.getUser();
         }
     }
 }

@@ -43,40 +43,6 @@ public class ClientController {
         return createClientService.execute(client);
     }
 
-    @PostMapping("/client-form")
-    public String createClientForm(@ModelAttribute("client") Client client, Model model) {
-        return createClientService.createForm(client, model);
-    }
-
-    @ModelAttribute("languages")
-    public List<Language> languages() {
-        List<Language> languages = languageRepository.findAll();
-        return  languages;
-    }
-
-    @GetMapping("/client-form")
-    public String showClientForm(Model model) {
-        model.addAttribute("client", new Client());
-        return "client-form";
-    }
-
-
-    @GetMapping("/view/form")
-    public String viewForm(Model model) {
-        return getClientService.formulario(model);
-    }
-
-    @ModelAttribute("clients")
-    public List<Client> clients() {
-        List<Client> clients = clientRepository.findAll();
-        return  clients;
-    }
-
-    @GetMapping("/list")
-    public String listClients(Model model) {
-        return  getClientService.listClients(model);
-    }
-
     @GetMapping("/view")
     public ResponseEntity<List<ClientDto>> getAllClients(Model model) {
         Void input = null;
@@ -86,11 +52,6 @@ public class ClientController {
     @GetMapping("/view/id/{id}")
     public ResponseEntity<ClientDto> getClient(@PathVariable Integer id) {
         return getClientService.execute(id);
-    }
-
-    @GetMapping("/view/name/{name}")
-    public ResponseEntity<List<ClientDto>> getClientByName(@PathVariable String name) {
-        return getClientService.execute(name);
     }
 
     @PutMapping("/edit/{id}")

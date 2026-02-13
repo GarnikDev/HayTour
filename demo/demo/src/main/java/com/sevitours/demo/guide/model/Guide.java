@@ -1,6 +1,7 @@
 package com.sevitours.demo.guide.model;
 
 import com.sevitours.demo.district.model.District;
+import com.sevitours.demo.user.model.AppUser;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,21 +20,13 @@ public class Guide {
     @JoinColumn(name = "\"District_id\"", nullable = false)
     private District district;
 
-    @Column(name = "\"Id_number\"")
-    private String idNumber;
-
-    @Column(name = "\"Name\"")
-    private String name;
-
-    @Column(name = "\"Email\"")
-    private String email;
-
-    @Column(name = "\"Phone\"")
-    private String phone;
-
     @Column(name = "\"Stars\"")
     private Integer stars;
 
     @Column(name = "\"Start_date\"")
     private LocalDate startDate;
+
+    @OneToOne
+    @JoinColumn(name = "\"user_id\"")
+    private AppUser user;
 }

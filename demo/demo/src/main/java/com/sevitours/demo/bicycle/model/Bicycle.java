@@ -19,11 +19,11 @@ public class Bicycle {
     @JoinColumn(name = "\"District_id\"", nullable = false)
     private District district;
 
-    @Column(name = "\"Type\"", nullable = false, columnDefinition = "bike_types")
+    @Column(name = "\"Type\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private BikeType type;
 
-    @Column(name = "\"condition\"", nullable = false, columnDefinition = "bike_condition")
+    @Column(name = "\"condition\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private Condition condition;
 

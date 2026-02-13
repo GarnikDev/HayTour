@@ -25,5 +25,5 @@ public class Tour {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "\"Type\"")
-    private TourType type;  // Or TourType enum
+    private TourType type;
 }

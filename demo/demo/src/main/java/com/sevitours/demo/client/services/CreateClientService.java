@@ -22,9 +22,4 @@ public class CreateClientService implements Command<Client, ClientDto> {
         Client savedClient = clientRepository.save(client);
         return ResponseEntity.status(HttpStatus.CREATED).body(new ClientDto(savedClient));
     }
-
-    public String createForm(Client client, Model model) {
-        clientRepository.save(client);
-        return "redirect:/clients/view";
-    }
 }

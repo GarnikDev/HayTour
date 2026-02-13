@@ -25,11 +25,11 @@ public class Bill {
     @Column(name = "\"subtotal\"", nullable = false)
     private Double subtotal;
 
-    @Column(name = "\"status\"", nullable = false, columnDefinition = "status_type")
+    @Column(name = "\"status\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column(name = "\"source_type\"", nullable = false, columnDefinition = "source_type")
+    @Column(name = "\"source_type\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private Source sourceType;
 
@@ -40,7 +40,7 @@ public class Bill {
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    @Column(name = "\"currency\"", nullable = false, columnDefinition = "currency")
+    @Column(name = "\"currency\"", nullable = false)
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
