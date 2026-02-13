@@ -5,10 +5,10 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface BillMapper {
-    @Mapping(source = "client.id", target ="clientId")
+    @Mapping(source = "customer.id", target ="customerId")
     BillDto toDto(Bill entity);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "client", ignore = true)
+    @Mapping(target = "customer", ignore = true)
     Bill toEntity(BillDto dto);
 }

@@ -1,9 +1,9 @@
 package com.sevitours.demo.bill.model;
 
 import com.sevitours.demo.bill.enums.Currency;
+import com.sevitours.demo.client.model.Customer;
 import com.sevitours.demo.common.enums.Source;
 import com.sevitours.demo.bill.enums.Status;
-import com.sevitours.demo.client.model.Client;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -38,7 +38,7 @@ public class Bill {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    private Customer customer;
 
     @Column(name = "\"currency\"", nullable = false)
     @Enumerated(EnumType.STRING)

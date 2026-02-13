@@ -1,25 +1,24 @@
 package com.sevitours.demo.client.services;
 
 import com.sevitours.demo.Command;
-import com.sevitours.demo.client.model.Client;
-import com.sevitours.demo.client.model.ClientDto;
-import com.sevitours.demo.client.repo.ClientRepository;
+import com.sevitours.demo.client.model.Customer;
+import com.sevitours.demo.client.model.CustomerDto;
+import com.sevitours.demo.client.repo.CustomerRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 @Service
-public class CreateClientService implements Command<Client, ClientDto> {
+public class CreateClientService implements Command<Customer, CustomerDto> {
 
-    private final ClientRepository clientRepository;
-    public CreateClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    private final CustomerRepository customerRepository;
+    public CreateClientService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     @Override
-    public ResponseEntity<ClientDto> execute(Client client) {
-        Client savedClient = clientRepository.save(client);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ClientDto(savedClient));
+    public ResponseEntity<CustomerDto> execute(Customer customer) {
+        Customer savedCustomer = customerRepository.save(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CustomerDto(savedCustomer));
     }
 }

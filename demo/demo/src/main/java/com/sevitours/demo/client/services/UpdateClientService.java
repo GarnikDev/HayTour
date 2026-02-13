@@ -1,31 +1,31 @@
 package com.sevitours.demo.client.services;
 
 import com.sevitours.demo.Command;
-import com.sevitours.demo.client.model.Client;
-import com.sevitours.demo.client.model.ClientDto;
-import com.sevitours.demo.client.repo.ClientRepository;
+import com.sevitours.demo.client.model.Customer;
+import com.sevitours.demo.client.model.CustomerDto;
+import com.sevitours.demo.client.repo.CustomerRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UpdateClientService implements Command<UpdateClientCommand, ClientDto> {
+public class UpdateClientService implements Command<UpdateCustomerCommand, CustomerDto> {
 
-    private final ClientRepository clientRepository;
+    private final CustomerRepository customerRepository;
 
-    public UpdateClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    public UpdateClientService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     @Override
-    public ResponseEntity<ClientDto> execute(UpdateClientCommand command) {
-        Optional<Client> optionalClient = clientRepository.findById(command.getId());
+    public ResponseEntity<CustomerDto> execute(UpdateCustomerCommand command) {
+        Optional<Customer> optionalClient = customerRepository.findById(command.getId());
         if(optionalClient.isPresent()) {
-            Client client = command.getClient();
-            client.setId(command.getId());
-            clientRepository.save(client);
-            return ResponseEntity.ok(new ClientDto(client));
+            Customer customer = command.getCustomer();
+            customer.setId(command.getId());
+            customerRepository.save(customer);
+            return ResponseEntity.ok(new CustomerDto(customer));
         }
         return null;
         //return new ResponseEntity<>(HttpStatus.NOT_FOUND);

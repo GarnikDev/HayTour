@@ -1,50 +1,49 @@
 package com.sevitours.demo.client.services;
 
 import com.sevitours.demo.Query;
-import com.sevitours.demo.client.model.Client;
-import com.sevitours.demo.client.model.ClientDto;
-import com.sevitours.demo.client.model.ClientMapper;
-import com.sevitours.demo.client.repo.ClientRepository;
+import com.sevitours.demo.client.model.Customer;
+import com.sevitours.demo.client.model.CustomerDto;
+import com.sevitours.demo.client.model.CustomerMapper;
+import com.sevitours.demo.client.repo.CustomerRepository;
 import com.sevitours.demo.language.repo.LanguageRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class GetClientService implements Query<Void, List<ClientDto>> {
+public class GetClientService implements Query<Void, List<CustomerDto>> {
 
-    private final ClientRepository clientRepository;
-    private final ClientMapper clientMapper;
+    private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
     private final LanguageRepository languageRepository;
 
 
-    public GetClientService(ClientRepository clientRepository,
-                            ClientMapper clientMapper,
+    public GetClientService(CustomerRepository customerRepository,
+                            CustomerMapper customerMapper,
                             LanguageRepository languageRepository) {
-        this.clientRepository = clientRepository;
-        this.clientMapper = clientMapper;
+        this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
         this.languageRepository = languageRepository;
     }
 
 
     @Override
-    public ResponseEntity<List<ClientDto>> execute(Void input) { // returns All existing clients
-        List<ClientDto> clientDto = clientRepository.findAll()
+    public ResponseEntity<List<CustomerDto>> execute(Void input) { // returns All existing clients
+        List<CustomerDto> customerDto = customerRepository.findAll()
                 .stream()
-                .map(clientMapper::toDto)
+                .map(customerMapper::toDto)
                 .toList();
 
-        return ResponseEntity.status(HttpStatus.OK).body(clientDto);
+        return ResponseEntity.status(HttpStatus.OK).body(customerDto);
     }
 
-    public ResponseEntity<ClientDto> execute(Integer id) { // Returns the client with inputed id
-        Optional<Client> client = clientRepository.findById(id);
+    public ResponseEntity<CustomerDto> execute(Integer id) { // Returns the client with inputed id
+        Optional<Customer> client = customerRepository.findById(id);
         if (client.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(clientMapper.toDto(client.get()));
+            return ResponseEntity.status(HttpStatus.OK).body(customerMapper.toDto(client.get()));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }

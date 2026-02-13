@@ -15,7 +15,7 @@ public class BillDto {
     private Status status;
     private Source sourceType;
     private Long sourceId;
-    private Integer clientId;
+    private Integer customerId;
     private Currency currency;
     private OffsetDateTime created_at;
 
@@ -26,7 +26,7 @@ public class BillDto {
             this.status = bill.getStatus();
             this.sourceType = bill.getSourceType();
             this.sourceId = bill.getSourceId();
-            this.clientId = bill.getClient().getId();
+            this.customerId = bill.getCustomer().getId();
             this.currency = bill.getCurrency();
             this.created_at = bill.getCreated_at();
         }

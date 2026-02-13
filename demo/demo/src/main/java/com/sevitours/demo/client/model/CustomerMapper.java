@@ -3,9 +3,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface ClientMapper {
-    ClientDto toDto(Client entity);
+public interface CustomerMapper {
+    CustomerDto toDto(Customer entity);
 
     @Mapping(target = "id", ignore = true)
-    Client toEntity(ClientDto dto);
+    Customer toEntity(CustomerDto dto);
 }

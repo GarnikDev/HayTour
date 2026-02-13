@@ -1,11 +1,10 @@
 package com.sevitours.demo.client.controller;
 
-import com.sevitours.demo.client.model.Client;
-import com.sevitours.demo.client.model.ClientDto;
-import com.sevitours.demo.client.repo.ClientRepository;
-import com.sevitours.demo.client.services.UpdateClientCommand;
+import com.sevitours.demo.client.model.Customer;
+import com.sevitours.demo.client.model.CustomerDto;
+import com.sevitours.demo.client.repo.CustomerRepository;
+import com.sevitours.demo.client.services.UpdateCustomerCommand;
 import com.sevitours.demo.client.services.*;
-import com.sevitours.demo.language.model.Language;
 import com.sevitours.demo.language.repo.LanguageRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,48 +15,48 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/clients")
-public class ClientController {
+public class CustomerController {
     private final GetClientService getClientService;
     private final CreateClientService createClientService;
     private final DeleteClientService deleteClientService;
     private final UpdateClientService updateClientService;
     private final LanguageRepository languageRepository;
-    private final ClientRepository clientRepository;
+    private final CustomerRepository customerRepository;
 
-    public ClientController(GetClientService getClientService,
-                            CreateClientService createClientService,
-                            DeleteClientService deleteClientService,
-                            UpdateClientService updateClientService,
-                            LanguageRepository languageRepository,
-                            ClientRepository clientRepository) {
+    public CustomerController(GetClientService getClientService,
+                              CreateClientService createClientService,
+                              DeleteClientService deleteClientService,
+                              UpdateClientService updateClientService,
+                              LanguageRepository languageRepository,
+                              CustomerRepository customerRepository) {
         this.getClientService = getClientService;
         this.createClientService = createClientService;
         this.deleteClientService = deleteClientService;
         this.updateClientService = updateClientService;
         this.languageRepository = languageRepository;
-        this.clientRepository = clientRepository;
+        this.customerRepository = customerRepository;
     }
 
-    @PostMapping("/client") // Will probably need to be improved in order to ensure the district with the id exists
-    public ResponseEntity<ClientDto> createClient(@RequestBody Client client) {
-        return createClientService.execute(client);
+    @PostMapping("/customer") // Will probably need to be improved in order to ensure the district with the id exists
+    public ResponseEntity<CustomerDto> createClient(@RequestBody Customer customer) {
+        return createClientService.execute(customer);
     }
 
     @GetMapping("/view")
-    public ResponseEntity<List<ClientDto>> getAllClients(Model model) {
+    public ResponseEntity<List<CustomerDto>> getAllClients(Model model) {
         Void input = null;
         return getClientService.execute(input);
     }
 
     @GetMapping("/view/id/{id}")
-    public ResponseEntity<ClientDto> getClient(@PathVariable Integer id) {
+    public ResponseEntity<CustomerDto> getClient(@PathVariable Integer id) {
         return getClientService.execute(id);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<ClientDto> updateClient(@PathVariable Integer id, @RequestBody Client client) {
+    public ResponseEntity<CustomerDto> updateClient(@PathVariable Integer id, @RequestBody Customer customer) {
         getClientService.execute(id);
-        return updateClientService.execute(new UpdateClientCommand(id, client));
+        return updateClientService.execute(new UpdateCustomerCommand(id, customer));
     }
 
     @DeleteMapping("/delete/{id}")
