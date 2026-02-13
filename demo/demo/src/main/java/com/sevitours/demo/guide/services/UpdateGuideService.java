@@ -1,6 +1,7 @@
 package com.sevitours.demo.guide.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.guide.model.Guide;
 import com.sevitours.demo.guide.model.GuideDto;
 import com.sevitours.demo.guide.repo.GuideRepository;
@@ -27,6 +28,6 @@ public class UpdateGuideService implements Command<UpdateGuideCommand, GuideDto>
             guideRepository.save(guide);
             return ResponseEntity.ok(new GuideDto(guide));
         }
-        return null;
+        throw new ItemNotFound("District");
     }
 }

@@ -1,6 +1,7 @@
 package com.sevitours.demo.manager.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.manager.model.Manager;
 import com.sevitours.demo.manager.repo.ManagerRepository;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,6 @@ public class DeleteManagerService implements Command<Integer, Void> {
             managerRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
-        return null;
+        throw new ItemNotFound("District");
     }
 }

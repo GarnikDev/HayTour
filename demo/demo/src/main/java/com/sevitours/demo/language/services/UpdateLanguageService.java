@@ -1,6 +1,7 @@
 package com.sevitours.demo.language.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.language.model.Language;
 import com.sevitours.demo.language.model.LanguageDto;
 import com.sevitours.demo.language.repo.LanguageRepository;
@@ -27,6 +28,6 @@ public class UpdateLanguageService implements Command<UpdateLanguageCommand, Lan
             languageRepository.save(language);
             return ResponseEntity.ok(new LanguageDto(language));
         }
-        return null;
+        throw new ItemNotFound("District");
     }
 }

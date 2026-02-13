@@ -4,6 +4,7 @@ import com.sevitours.demo.bill.model.Bill;
 import com.sevitours.demo.bill.model.BillDto;
 import com.sevitours.demo.bill.model.BillMapper;
 import com.sevitours.demo.bill.repo.BillRepository;
+import com.sevitours.demo.common.ItemNotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class BillService {
         if (billOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(billMapper.toDto(billOptional.get()));
         }else  {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            throw new ItemNotFound("Bill");
         }
     }
 
@@ -58,7 +59,7 @@ public class BillService {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        return null;
+        throw new ItemNotFound("Bill");
     }
 
     //Update
@@ -71,7 +72,7 @@ public class BillService {
             return ResponseEntity.ok(new BillDto(bill));
         }
 
-        return null;
+        throw new ItemNotFound("Bill");
     }
 
 }

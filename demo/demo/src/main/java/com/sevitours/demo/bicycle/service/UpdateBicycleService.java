@@ -4,6 +4,7 @@ import com.sevitours.demo.Command;
 import com.sevitours.demo.bicycle.model.Bicycle;
 import com.sevitours.demo.bicycle.model.BicycleDto;
 import com.sevitours.demo.bicycle.repo.BicycleRepository;
+import com.sevitours.demo.common.ItemNotFound;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,6 @@ public class UpdateBicycleService implements Command<UpdateBicycleCommand, Bicyc
             return ResponseEntity.ok(new BicycleDto(bicycle));
         }
 
-        return null;
+        throw new ItemNotFound("Bill");
     }
 }

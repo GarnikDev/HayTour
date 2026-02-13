@@ -1,6 +1,7 @@
 package com.sevitours.demo.rental.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.rental.model.Rental;
 import com.sevitours.demo.rental.repo.RentalRepository;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,6 @@ public class DeleteRentalService implements Command<Integer, Void> {
             rentalRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
-        return null;
+        throw new ItemNotFound("District");
     }
 }

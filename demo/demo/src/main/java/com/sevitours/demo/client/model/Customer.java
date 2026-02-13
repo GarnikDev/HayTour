@@ -1,7 +1,9 @@
 package com.sevitours.demo.client.model;
 
+import com.sevitours.demo.language.model.Language;
 import com.sevitours.demo.user.model.AppUser;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
@@ -14,11 +16,14 @@ public class Customer {
     @Column(name = "\"Id\"", nullable = false)
     private Integer id;
 
+    @NotBlank
     @Column(name = "\"Country\"", nullable = false)
     private String country;
 
-    @Column(name = "\"Language\"", nullable = false)
-    private String language;
+    @NotBlank
+    @ManyToOne
+    @JoinColumn(name = "\"Language\"", nullable = false)
+    private Language language;
 
     @OneToOne
     @JoinColumn(name = "\"user_id\"")

@@ -1,6 +1,7 @@
 package com.sevitours.demo.manager.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.manager.model.Manager;
 import com.sevitours.demo.manager.model.ManagerDto;
 import com.sevitours.demo.manager.repo.ManagerRepository;
@@ -27,6 +28,6 @@ public class UpdateManagerService implements Command<UpdateManagerCommand, Manag
             managerRepository.save(manager);
             return ResponseEntity.ok(new ManagerDto(manager));
         }
-        return null;
+        throw new ItemNotFound("Rental");
     }
 }

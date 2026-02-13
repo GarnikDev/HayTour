@@ -1,6 +1,7 @@
 package com.sevitours.demo.rental.services;
 
 import com.sevitours.demo.Query;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.rental.model.Rental;
 import com.sevitours.demo.rental.model.RentalDto;
 import com.sevitours.demo.rental.model.RentalMapper;
@@ -37,6 +38,6 @@ public class GetRentalService implements Query<Void, List<RentalDto>> {
         if (rental.isPresent()) {
             return ResponseEntity.ok(rentalMapper.toDto(rental.get()));
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        throw new ItemNotFound("Rental");
     }
 }

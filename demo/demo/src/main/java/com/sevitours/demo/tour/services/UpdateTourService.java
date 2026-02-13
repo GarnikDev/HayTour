@@ -1,6 +1,7 @@
 package com.sevitours.demo.tour.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.tour.model.Tour;
 import com.sevitours.demo.tour.model.TourDto;
 import com.sevitours.demo.tour.repo.TourRepository;
@@ -27,6 +28,6 @@ public class UpdateTourService implements Command<UpdateTourCommand, TourDto> {
             tourRepository.save(tour);
             return ResponseEntity.ok(new TourDto(tour));
         }
-        return null;
+        throw new ItemNotFound("Tour");
     }
 }

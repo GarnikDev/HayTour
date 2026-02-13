@@ -1,6 +1,7 @@
 package com.sevitours.demo.tour.services;
 
 import com.sevitours.demo.Query;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.tour.model.Tour;
 import com.sevitours.demo.tour.model.TourDto;
 import com.sevitours.demo.tour.model.TourMapper;
@@ -36,6 +37,6 @@ public class GetTourService implements Query<Void, List<TourDto>> {
         if (tour.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(tourMapper.toDto(tour.get()));
         }
-        return null;
+        throw new ItemNotFound("Tour");
     }
 }

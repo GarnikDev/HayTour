@@ -1,6 +1,7 @@
 package com.sevitours.demo.language.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.language.model.Language;
 import com.sevitours.demo.language.repo.LanguageRepository;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,6 @@ public class DeleteLanguageService implements Command<Integer, Void> {
             languageRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
-        return null;
+        throw new ItemNotFound("District");
     }
 }

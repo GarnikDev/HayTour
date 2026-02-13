@@ -7,14 +7,14 @@ import lombok.Data;
 public class CustomerDto {
     private Integer id;
     private String country;
-    private String language;
+    private Integer languageId;
     private AppUser user;
 
     public CustomerDto(Customer customer) {
         if(customer != null){
             this.id = customer.getId();
             this.country = customer.getCountry();
-            this.language = customer.getLanguage();
+            this.languageId = customer.getLanguage().getId();
             this.user = customer.getUser();
         }
     }

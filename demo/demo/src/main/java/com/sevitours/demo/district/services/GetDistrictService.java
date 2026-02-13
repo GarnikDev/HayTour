@@ -1,6 +1,7 @@
 package com.sevitours.demo.district.services;
 
 import com.sevitours.demo.Query;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.district.enums.DistrictType;
 import com.sevitours.demo.district.model.District;
 import com.sevitours.demo.district.model.DistrictDto;
@@ -58,7 +59,7 @@ public class GetDistrictService implements Query<Void, List<DistrictDto>> {
         if(districtWithId.isPresent()){
             return ResponseEntity.status(HttpStatus.OK).body(districtMapper.toDto(districtWithId.get()));
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            throw new ItemNotFound("District");
         }
     }
 }

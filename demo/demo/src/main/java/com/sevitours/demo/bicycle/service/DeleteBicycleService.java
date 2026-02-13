@@ -3,6 +3,7 @@ package com.sevitours.demo.bicycle.service;
 import com.sevitours.demo.Command;
 import com.sevitours.demo.bicycle.model.Bicycle;
 import com.sevitours.demo.bicycle.repo.BicycleRepository;
+import com.sevitours.demo.common.ItemNotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class DeleteBicycleService implements Command<Long, Void> {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        return null;
+        throw new ItemNotFound("Bill");
     }
 }
 

@@ -5,6 +5,7 @@ import com.sevitours.demo.client.model.Customer;
 import com.sevitours.demo.client.model.CustomerDto;
 import com.sevitours.demo.client.model.CustomerMapper;
 import com.sevitours.demo.client.repo.CustomerRepository;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.language.repo.LanguageRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +19,12 @@ public class GetClientService implements Query<Void, List<CustomerDto>> {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
-    private final LanguageRepository languageRepository;
 
 
     public GetClientService(CustomerRepository customerRepository,
-                            CustomerMapper customerMapper,
-                            LanguageRepository languageRepository) {
+                            CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
-        this.languageRepository = languageRepository;
     }
 
 
@@ -45,7 +43,7 @@ public class GetClientService implements Query<Void, List<CustomerDto>> {
         if (client.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(customerMapper.toDto(client.get()));
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            throw new ItemNotFound("Client");
         }
     }
 

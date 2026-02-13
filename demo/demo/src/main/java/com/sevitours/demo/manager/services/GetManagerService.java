@@ -1,6 +1,7 @@
 package com.sevitours.demo.manager.services;
 
 import com.sevitours.demo.Query;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.manager.model.Manager;
 import com.sevitours.demo.manager.model.ManagerMapper;
 import com.sevitours.demo.manager.model.ManagerDto;
@@ -38,6 +39,6 @@ public class GetManagerService implements Query<Void, List<ManagerDto>> {
         if (manager.isPresent()) {
             return ResponseEntity.ok(managerMapper.toDto(manager.get()));
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        throw new ItemNotFound("District");
     }
 }

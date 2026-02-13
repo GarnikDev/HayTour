@@ -1,6 +1,7 @@
 package com.sevitours.demo.rental.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.rental.model.Rental;
 import com.sevitours.demo.rental.model.RentalDto;
 import com.sevitours.demo.rental.repo.RentalRepository;
@@ -27,6 +28,6 @@ public class UpdateRentalService implements Command<UpdateRentalCommand, RentalD
             rentalRepository.save(rental);
             return ResponseEntity.ok(new RentalDto(rental));
         }
-        return null;
+        throw new ItemNotFound("Rental");
     }
 }

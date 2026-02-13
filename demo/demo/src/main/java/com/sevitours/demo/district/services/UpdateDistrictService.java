@@ -1,6 +1,7 @@
 package com.sevitours.demo.district.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.district.model.District;
 import com.sevitours.demo.district.model.DistrictDto;
 import com.sevitours.demo.district.repo.DistrictRepository;
@@ -28,6 +29,6 @@ public class UpdateDistrictService implements Command<UpdateDistrictCommand, Dis
             return ResponseEntity.ok(new DistrictDto(district));
         }
 
-        return null;
+        throw new ItemNotFound("District");
     }
 }

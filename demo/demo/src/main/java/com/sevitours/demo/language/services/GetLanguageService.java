@@ -1,6 +1,7 @@
 package com.sevitours.demo.language.services;
 
 import com.sevitours.demo.Query;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.language.model.Language;
 import com.sevitours.demo.language.model.LanguageDto;
 import com.sevitours.demo.language.model.LanguageMapper;
@@ -39,6 +40,6 @@ public class GetLanguageService implements Query<Void, List<LanguageDto>> {
         if (language.isPresent()) {
             return ResponseEntity.ok(languageMapper.toDto(language.get()));
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        throw new ItemNotFound("District");
     }
 }

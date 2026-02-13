@@ -6,6 +6,7 @@ import com.sevitours.demo.bicycle.model.BicycleDto;
 import com.sevitours.demo.bicycle.model.BicycleMapper;
 import com.sevitours.demo.bicycle.repo.BicycleRepository;
 import com.sevitours.demo.bicycle.enums.BikeType;
+import com.sevitours.demo.common.ItemNotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class GetBicycleService implements Query<Void, List<BicycleDto>> {
         if (bicycleOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(bicycleMapper.toDto(bicycleOptional.get()));
         }else  {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            throw new ItemNotFound("Bill");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.sevitours.demo.guide.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.guide.model.Guide;
 import com.sevitours.demo.guide.repo.GuideRepository;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,6 @@ public class DeleteGuideService implements Command<Integer, Void> {
             guideRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
-        return null;
+        throw new ItemNotFound("District");
     }
 }

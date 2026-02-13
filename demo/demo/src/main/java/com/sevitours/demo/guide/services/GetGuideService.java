@@ -1,6 +1,7 @@
 package com.sevitours.demo.guide.services;
 
 import com.sevitours.demo.Query;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.guide.model.Guide;
 import com.sevitours.demo.guide.model.GuideDto;
 import com.sevitours.demo.guide.model.GuideMapper;
@@ -39,6 +40,6 @@ public class GetGuideService implements Query<Void, List<GuideDto>> {
         if (guide.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(guideMapper.toDto(guide.get()));
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        throw new ItemNotFound("District");
     }
 }

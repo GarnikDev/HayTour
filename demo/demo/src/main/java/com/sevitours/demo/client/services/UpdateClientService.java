@@ -4,6 +4,7 @@ import com.sevitours.demo.Command;
 import com.sevitours.demo.client.model.Customer;
 import com.sevitours.demo.client.model.CustomerDto;
 import com.sevitours.demo.client.repo.CustomerRepository;
+import com.sevitours.demo.common.ItemNotFound;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,7 @@ public class UpdateClientService implements Command<UpdateCustomerCommand, Custo
             customerRepository.save(customer);
             return ResponseEntity.ok(new CustomerDto(customer));
         }
-        return null;
-        //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        throw new ItemNotFound("Bill");
     }
 
 }

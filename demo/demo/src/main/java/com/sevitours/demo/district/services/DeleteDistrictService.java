@@ -1,6 +1,7 @@
 package com.sevitours.demo.district.services;
 
 import com.sevitours.demo.Command;
+import com.sevitours.demo.common.ItemNotFound;
 import com.sevitours.demo.district.model.District;
 import com.sevitours.demo.district.repo.DistrictRepository;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,6 @@ public class DeleteDistrictService implements Command<Integer, Void> {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        return null;
+        throw new ItemNotFound("District");
     }
 }

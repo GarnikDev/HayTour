@@ -3,6 +3,7 @@ package com.sevitours.demo.client.services;
 import com.sevitours.demo.Command;
 import com.sevitours.demo.client.model.Customer;
 import com.sevitours.demo.client.repo.CustomerRepository;
+import com.sevitours.demo.common.ItemNotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,6 @@ public class DeleteClientService implements Command<Integer, Void>{
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        return null;
+        throw new ItemNotFound("Bill");
     }
 }
