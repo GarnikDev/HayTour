@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,13 +17,15 @@ import java.util.List;
 @Entity
 @Table(name="\"AppUser\"")
 @Data
-public class AppUser{
+public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
-
     private Long id;
+
+    @Column(name = "supabase_id", unique = true)
+    private String supabaseId;
 
     @NotBlank(message = "{user.name.notblank}")
     @Column(name = "\"Name\"", nullable = false)
@@ -32,17 +35,13 @@ public class AppUser{
     @Column(name = "\"Email\"",  nullable = false, unique = true)
     private String email;
 
-    @NotBlank(message = "{user.phone.notblank}")
-    @Column(name = "\"Phone\"", nullable = false)
+
+    @Column(name = "\"Phone\"")
     private String phone;
 
-    @NotBlank(message = "{user.idnumber.notblank}")
+
     @Column(name = "\"Id_number\"")
     private String idNumber;
-
-    @NotBlank(message = "{user.password.notblank}")
-    @Column(name = "\"Password\"", nullable = false)
-    private String password;
 
     @NotNull
     @Column(name = "\"Enabled\"", nullable = false)
@@ -57,4 +56,38 @@ public class AppUser{
     @Enumerated(EnumType.STRING)
     private AppUserRole role;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public @Nullable String getPassword() {
+        return "";
+    }
+
+    @Override
+    public String getUsername() {
+        return this.name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
 }

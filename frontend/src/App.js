@@ -1,30 +1,25 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './components/Login';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import Register from "./components/Register";
+import RegistrationSuccessful from "./components/RegistrationSuccessful";
+import ButtonAppBar from "./ButtonAppBar";
+
 
 function App() {
     return (
-        <Router>
-            <div className="App">
-                <header className="App-header">
-                    <h1>My Client Management App</h1>
-                </header>
-
-                <main>
+        <div className="App">
+            <BrowserRouter>
+                <div className="App-header">
+                    <ButtonAppBar/>
                     <Routes>
-                        {/* Redirect from / to /login */}
-                        <Route path="/" element={<Navigate to="/login" replace />} />
-                        {/* Client list page */}
-                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register></Register>}/>
+                        <Route path="/registrationSuccessful" element={<RegistrationSuccessful></RegistrationSuccessful>}/>
                     </Routes>
-                </main>
-
-                <footer>
-                    <p>© 2026 HayTour</p>
-                </footer>
-            </div>
-        </Router>
+                </div>
+            </BrowserRouter>
+        </div>
     );
 }
 

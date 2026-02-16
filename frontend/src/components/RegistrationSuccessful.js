@@ -1,0 +1,17 @@
+import React from "react";
+import {Typography, Container, Box} from '@mui/material';
+
+export default function RegistrationSuccessful() {
+    return (
+        <Container maxWidth="xs">
+            <Box sx={{ mt: 8, color: 'green' }}>
+                <Typography variant="h3" align="center" gutterBottom>
+                    You have successfully registered!!!
+                </Typography>
+                <Typography variant="h6" align="center" gutterBottom>
+                    You can now Login
+                </Typography>
+            </Box>
+        </Container>
+    )
+}
