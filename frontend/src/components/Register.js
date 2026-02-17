@@ -7,12 +7,12 @@ import Button from 'react-bootstrap/Button';
 export default function Register() {
 
     const [formData, setFormData] = useState({
-        username: "",
+        name: "",
         phone: "",
         email: "",
         password: "",
         confirmPassword: "",
-        id: ""
+        idNumber: ""
     });
 
     const [error, setError] = useState('');
@@ -51,15 +51,15 @@ export default function Register() {
         <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formGroupUsername">
                 <Form.Label>Username*</Form.Label>
-                <Form.Control name="username" type="text" placeholder="Username" value={formData.username} onChange={handleChange} />
+                <Form.Control name="name" type="text" placeholder="Username" value={formData.name} onChange={handleChange} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupPhone">
                 <Form.Label>Phone</Form.Label>
                 <Form.Control name="phone" type="text" placeholder="Phone" value={formData.phone} onChange={handleChange} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupId">
-                <Form.Label>ID</Form.Label>
-                <Form.Control name="id" type="text" placeholder="Id" value={formData.id} onChange={handleChange} />
+                <Form.Label>ID number</Form.Label>
+                <Form.Control name="idNumber" type="text" placeholder="Id" value={formData.idNumber} onChange={handleChange} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>Email address*</Form.Label>
