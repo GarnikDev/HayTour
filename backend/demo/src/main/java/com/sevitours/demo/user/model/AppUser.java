@@ -28,8 +28,8 @@ public class AppUser implements UserDetails {
     private String supabaseId;
 
     @NotBlank(message = "{user.name.notblank}")
-    @Column(name = "\"Name\"", nullable = false)
-    private String name;
+    @Column(name = "\"Username\"", nullable = false)
+    private String username;
 
     @Email(message = "{user.email.email}")
     @Column(name = "\"Email\"",  nullable = false, unique = true)
@@ -68,7 +68,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.name;
+        return this.username;
     }
 
     @Override

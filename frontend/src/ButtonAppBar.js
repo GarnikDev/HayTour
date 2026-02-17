@@ -23,7 +23,9 @@ export default function ButtonAppBar() {
                         HayTour
                     </Typography>
 
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit" onClick={() => navigate('/login')}>
+                        Log in
+                    </Button>
                     <Button color="inherit" onClick={() => navigate('/register')}>
                         Sign Up
                     </Button>

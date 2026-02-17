@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 public class AppUserDto {
 
     private Long id;
-    private String name;
+    private String username;
     private String email;
     private String phone;
     private String idNumber;
@@ -22,7 +22,7 @@ public class AppUserDto {
     public AppUserDto(AppUser appUser) {
         if(appUser != null) {
             this.id = appUser.getId();
-            this.name = appUser.getName();
+            this.username = appUser.getUsername();
             this.email = appUser.getEmail();
             this.phone = appUser.getPhone();
             this.idNumber = appUser.getIdNumber();

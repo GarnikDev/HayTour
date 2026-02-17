@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 export default function Register() {
 
     const [formData, setFormData] = useState({
-        name: "",
+        username: "",
         phone: "",
         email: "",
         password: "",
@@ -34,7 +34,7 @@ export default function Register() {
         setError("");
 
         try {
-            const response = await axios.post("http://localhost:8081/register", formData);;
+            const response = await axios.post("http://localhost:8081/register", formData);
 
             if (response.status === 201) {
                 navigate("/registrationSuccessful");
@@ -51,7 +51,7 @@ export default function Register() {
         <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formGroupUsername">
                 <Form.Label>Username*</Form.Label>
-                <Form.Control name="name" type="text" placeholder="Username" value={formData.name} onChange={handleChange} />
+                <Form.Control name="username" type="text" placeholder="Username" value={formData.username} onChange={handleChange} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupPhone">
                 <Form.Label>Phone</Form.Label>

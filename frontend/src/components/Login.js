@@ -1,48 +1,82 @@
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Button from 'react-bootstrap/Button';
 
-const Login = () => {
-    const baseUrl = "http://localhost:8081/login";
-    const [user, setUser] = useState();
+export default function Login() {
 
-    const login = () => {
-        <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+    const [formData, setFormData] = useState({
+        username: "",
+        password: ""
+    });
+
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
     }
 
-    const fetchClients = () => {
-        axios.get(baseUrl)
-            .then((response) => {
-                console.log("RAW API RESPONSE:", response.data);
-                setUser(response.data);
-            })
-            .catch((error) => {
-                console.log("Error retrieving clients " + error);
-            });
-    };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setError("");
+
+        try {
+            const response = await axios.post(
+                "http://localhost:8081/login",
+                {
+                    username: formData.username,
+                    password: formData.password
+                },
+                { withCredentials: true } // Important: send cookie automatically
+            );
+
+            if (response.status === 200) {
+                // No need to store token if using HttpOnly cookie
+                navigate("/api/clients/view"); // replace with your protected route
+            } else {
+                setError("Invalid credentials");
+            }
+
+        } catch (err) {
+            setError("Invalid username or password");
+        }
+    }
 
     return (
-        <div>
-            <h1>Log in</h1>
-            <Login />
-        </div>
-    );
-};
+        <Form onSubmit={handleSubmit} style={{ width: "300px", margin: "0 auto" }}>
 
-export default Login;
+            <Form.Group className="mb-3" controlId="formGroupUsername">
+                <Form.Label>Username*</Form.Label>
+                <Form.Control
+                    name="username"
+                    type="text"
+                    placeholder="Enter username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formGroupPassword">
+                <Form.Label>Password*</Form.Label>
+                <Form.Control
+                    name="password"
+                    type="password"
+                    placeholder="Enter password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                />
+            </Form.Group>
+
+            <Button type="submit" className="w-100">Login</Button>
+
+            {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+        </Form>
+    );
+}
