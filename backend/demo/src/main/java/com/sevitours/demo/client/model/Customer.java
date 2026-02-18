@@ -16,13 +16,11 @@ public class Customer {
     @Column(name = "\"Id\"", nullable = false)
     private Integer id;
 
-    @NotBlank
-    @Column(name = "\"Country\"", nullable = false)
+    @Column(name = "\"Country\"")
     private String country;
 
-    @NotBlank
     @ManyToOne
-    @JoinColumn(name = "\"Language\"", nullable = false)
+    @JoinColumn(name = "\"Language\"")
     private Language language;
 
     @OneToOne
