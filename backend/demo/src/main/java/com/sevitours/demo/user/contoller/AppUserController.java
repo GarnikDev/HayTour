@@ -50,10 +50,10 @@ public class AppUserController {
             // Set secure cookie with JWT
             ResponseCookie cookie = ResponseCookie.from("accessToken", tokens.getAccess_token())
                     .httpOnly(true)
-                    .secure(false)           // ← true in production!
+                    .secure(true)
                     .path("/")
                     .sameSite("Strict")
-                    .maxAge(3600)       // e.g. 24 hours
+                    .maxAge(3600)
                     .build();
 
             response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
