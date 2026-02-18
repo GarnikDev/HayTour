@@ -1,10 +1,12 @@
 import Form from 'react-bootstrap/Form';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/axiosConfig";
 import Button from 'react-bootstrap/Button';
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
+    const { checkAuth } = useAuth();
 
     const [formData, setFormData] = useState({
         username: "",
@@ -26,21 +28,16 @@ export default function Login() {
         setError("");
 
         try {
-            const response = await axios.post(
-                "http://localhost:8081/login",
+            await axios.post(
+                "/login",
                 {
                     username: formData.username,
                     password: formData.password
                 },
                 { withCredentials: true } // Important: send cookie automatically
             );
-
-            if (response.status === 200) {
-                // No need to store token if using HttpOnly cookie
-                navigate("/api/clients/view"); // replace with your protected route
-            } else {
-                setError("Invalid credentials");
-            }
+            await checkAuth();
+            navigate("/api/clients/view");
 
         } catch (err) {
             setError("Invalid username or password");

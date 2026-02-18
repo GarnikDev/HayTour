@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axiosConfig';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Table from 'react-bootstrap/Table';
+import { useAuth } from "../context/AuthContext";
 
 const ClientList = () => {
-    const baseUrl = "http://localhost:8081/api/clients/view";
+
+    const { user, loading } = useAuth();
     const [clients, setClients] = useState([]);
 
     const fetchClients = () => {
-        axios.get(baseUrl)
+        axios.get("/api/clients/view")
             .then((response) => {
                 console.log("RAW API RESPONSE:", response.data);
                 setClients(response.data);
@@ -19,8 +21,13 @@ const ClientList = () => {
     };
 
     useEffect(() => {
-        fetchClients();
-    }, []);
+        if (!loading && user) {
+            fetchClients();
+        }
+    }, [loading, user]);
+
+    if (loading) return <p>Loading...</p>;
+    if (!user) return <p>Please login first</p>;
 
     const ShowClients = () => (
         <ListGroup>
