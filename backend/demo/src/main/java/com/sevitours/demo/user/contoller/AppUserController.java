@@ -43,13 +43,13 @@ public class AppUserController {
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(Authentication authentication) {
 
-        if (authentication == null || !authentication.isAuthenticated()) {
+        if (authentication == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        String username = authentication.getName();
-
-        AppUser user = appUserRepository.findByUsername(username);
+        String email = authentication.getName();
+        System.out.println("email: " + email);
+        AppUser user = appUserRepository.findByEmail(email);
 
         return ResponseEntity.ok(user);
     }
@@ -65,13 +65,17 @@ public class AppUserController {
             // Set secure cookie with JWT
             ResponseCookie cookie = ResponseCookie.from("accessToken", tokens.getAccess_token())
                     .httpOnly(true)
-                    .secure(true)
+                    .secure(false) //needs to be set true in production
                     .path("/")
-                    .sameSite("Strict")
+                    .sameSite("Lax") //needs to be set Strict in production
                     .maxAge(3600)
                     .build();
 
-            response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+            //response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+
+            String auth = cookie.toString();
+
+            response.addHeader(HttpHeaders.WWW_AUTHENTICATE, cookie.toString());
 
             return ResponseEntity.ok(Map.of(
                     "message", "Login successful",

@@ -6,7 +6,7 @@ const AuthContext = createContext();
 export function AuthProvider({ children }, userData) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState({userData});
+  const [userInfo, setUserInfo] = useState({userData});
 
   const checkAuth = async () => {
     try {
