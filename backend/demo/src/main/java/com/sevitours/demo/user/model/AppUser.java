@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name="\"AppUser\"")
@@ -20,12 +21,8 @@ import java.util.List;
 public class AppUser implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
-    private Long id;
-
-    @Column(name = "supabase_id", unique = true)
-    private String supabaseId;
+    private UUID id;
 
     @NotBlank(message = "{user.name.notblank}")
     @Column(name = "\"Username\"", nullable = false)
@@ -35,10 +32,8 @@ public class AppUser implements UserDetails {
     @Column(name = "\"Email\"",  nullable = false, unique = true)
     private String email;
 
-
     @Column(name = "\"Phone\"")
     private String phone;
-
 
     @Column(name = "\"Id_number\"")
     private String idNumber;

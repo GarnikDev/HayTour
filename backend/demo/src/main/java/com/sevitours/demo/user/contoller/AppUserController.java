@@ -16,9 +16,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.oauth2.jwt.Jwt;
 import java.time.OffsetDateTime;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping
@@ -40,19 +41,7 @@ public class AppUserController {
     }
 */
 
-    @GetMapping("/me")
-    public ResponseEntity<?> getCurrentUser(Authentication authentication) {
 
-        if (authentication == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-        String email = authentication.getName();
-        System.out.println("email: " + email);
-        AppUser user = appUserRepository.findByEmail(email);
-
-        return ResponseEntity.ok(user);
-    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(
@@ -75,7 +64,7 @@ public class AppUserController {
 
             String auth = cookie.toString();
 
-            response.addHeader(HttpHeaders.WWW_AUTHENTICATE, cookie.toString());
+            response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
             return ResponseEntity.ok(Map.of(
                     "message", "Login successful",
@@ -93,16 +82,41 @@ public class AppUserController {
         }
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(Authentication authentication) {
+        if (authentication == null) {
+            System.out.println("DEBUG: Authentication object is NULL");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Auth is null");
+        }
+
+        System.out.println("DEBUG: Principal type: " + authentication.getPrincipal().getClass().getName());
+
+        if (!(authentication.getPrincipal() instanceof Jwt)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Principal is not JWT");
+        }
+
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+        UUID userId = UUID.fromString(jwt.getSubject());
+
+        // Explicitly handling the Optional
+        java.util.Optional<AppUser> userOptional = appUserRepository.findById(userId);
+
+        if (userOptional.isPresent()) {
+            return ResponseEntity.ok(userOptional.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "User not found in local database"));
+        }
+    }
+
 
     @PostMapping("/register")
     public ResponseEntity<AppUser> register(@RequestBody RegisterDto registerDto) {
-
-        authService.createUser(registerDto.getEmail(), registerDto.getPassword());
-
-        System.out.println("\n\n\n\nUsername: " + registerDto.getUsername()+"\n\n\n\n");
+        // 1. Create user in Supabase and get the UUID
+        UUID supabaseUuid = authService.createUser(registerDto.getEmail(), registerDto.getPassword());
 
         AppUser appUser = new AppUser();
-
+        appUser.setId(supabaseUuid);
         appUser.setUsername(registerDto.getUsername());
         appUser.setPhone(registerDto.getPhone());
         appUser.setIdNumber(registerDto.getIdNumber());
@@ -110,7 +124,22 @@ public class AppUserController {
         appUser.setCreatedAt(OffsetDateTime.now());
         appUser.setEnabled(true);
         appUser.setRole(AppUserRole.CLIENT);
+
         AppUser newAppUser = appUserRepository.save(appUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(newAppUser);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        // Optional: Call Supabase logout API if needed (using refresh token or session)
+        ResponseCookie cookie = ResponseCookie.from("accessToken", "")
+                .httpOnly(true)
+                .secure(false) // true in prod
+                .path("/")
+                .sameSite("Lax") // Strict in prod
+                .maxAge(0) // Clears the cookie
+                .build();
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        return ResponseEntity.ok(Map.of("message", "Logged out"));
     }
 }

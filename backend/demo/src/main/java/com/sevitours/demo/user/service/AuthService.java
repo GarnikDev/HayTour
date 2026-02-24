@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class AuthService {
@@ -35,6 +36,7 @@ public class AuthService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("apikey", key);
+        headers.set("Authorization", "Bearer " + key); // Supabase often requires this too
         return headers;
     }
 
@@ -65,22 +67,48 @@ public class AuthService {
         }
     }
 
-    public void createUser(String email, String password) { // Changed to void, as you don't need full response
+    public UUID createUser(String email, String password) {
         String url = supabaseUrl + "/auth/v1/signup";
-        HttpHeaders headers = createHeaders(anonKey);
 
-        Map<String, Object> body = new HashMap<>();
-        body.put("email", email);
-        body.put("password", password);
-        body.put("email_confirm", false);
+        // 1. Prepare the request body
+        Map<String, Object> requestBody = Map.of(
+                "email", email,
+                "password", password
+        );
 
-        System.out.println("\n\n\n\n\nPassword: " + password + "\n\n\n\n\n");
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, createHeaders(anonKey));
 
-        HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
-        ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, request, Map.class);
+        try {
+            // 2. Make the call to Supabase
+            ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, request, Map.class);
+            Map<String, Object> body = response.getBody();
 
-        if (response.getStatusCode() != HttpStatus.OK && response.getStatusCode() != HttpStatus.CREATED) {
-            throw new RuntimeException("User creation failed: " + response.getBody().get("error"));
+            if (body == null) {
+                throw new RuntimeException("Supabase returned an empty response body.");
+            }
+
+            // 3. Handle the nested "user" object structure
+            String idString = null;
+            if (body.get("user") instanceof Map) {
+                Map<String, Object> userMap = (Map<String, Object>) body.get("user");
+                idString = (String) userMap.get("id");
+            } else if (body.containsKey("id")) {
+                // Fallback for flat structures
+                idString = (String) body.get("id");
+            }
+
+            // 4. Validate the ID and return
+            if (idString == null) {
+                System.err.println("Unexpected Supabase Response: " + body);
+                throw new RuntimeException("User created, but no ID found in response.");
+            }
+
+            return UUID.fromString(idString);
+
+        } catch (HttpClientErrorException e) {
+            // This catches 4xx errors (like "User already exists" or "Weak password")
+            System.err.println("Supabase Auth Error: " + e.getResponseBodyAsString());
+            throw new RuntimeException("Signup failed: " + e.getResponseBodyAsString());
         }
     }
 }

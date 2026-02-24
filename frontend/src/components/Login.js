@@ -1,9 +1,10 @@
 import Form from 'react-bootstrap/Form';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../api/axiosConfig";
+import axios from "../api/axiosConfig"; // Use the instance
 import Button from 'react-bootstrap/Button';
 import { useAuth } from "../context/AuthContext";
+import Alert from 'react-bootstrap/Alert';
 
 export default function Login() {
     const { checkAuth } = useAuth();
@@ -25,28 +26,19 @@ export default function Login() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setError("");
+        setError(""); // Clear previous error
 
         try {
-            await axios.post(
-                "/login",
-                {
-                    username: formData.username,
-                    password: formData.password
-                },
-                { withCredentials: true } // Important: send cookie automatically
-            );
-            await checkAuth();
+            await axios.post("/login", formData); // Simplified: formData has username/password
+            await checkAuth(); // Updates auth state
             navigate("/api/clients/view");
-
         } catch (err) {
-            setError("Invalid username or password");
+            setError(err.response?.data?.error || "Invalid username or password");
         }
     }
 
     return (
         <Form onSubmit={handleSubmit} style={{ width: "300px", margin: "0 auto" }}>
-
             <Form.Group className="mb-3" controlId="formGroupUsername">
                 <Form.Label>Username*</Form.Label>
                 <Form.Control
@@ -73,7 +65,7 @@ export default function Login() {
 
             <Button type="submit" className="w-100">Login</Button>
 
-            {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+            {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
         </Form>
     );
 }

@@ -8,6 +8,7 @@ import RegistrationSuccessful from "./components/RegistrationSuccessful";
 import ButtonAppBar from "./ButtonAppBar";
 import Login from "./components/Login";
 import ClientList from "./components/ClientList";
+import Logout from "./components/Logout";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                             <Route path="/api/clients/view" element={<ClientList></ClientList>} />
                             <Route path="/register" element={<Register></Register>}/>
                             <Route path="/login" element={<Login></Login>}/>
+                            <Route path="/logout" element={<Logout></Logout>}/>
                             <Route path="/registrationSuccessful" element={<RegistrationSuccessful></RegistrationSuccessful>}/>
                         </Routes>
                     </div>

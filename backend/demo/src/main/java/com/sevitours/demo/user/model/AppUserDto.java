@@ -5,11 +5,12 @@ import com.sevitours.demo.user.repo.AppUserRepository;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Data
 public class AppUserDto {
 
-    private Long id;
+    private UUID id;
     private String username;
     private String email;
     private String phone;

@@ -5,10 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from './context/AuthContext';
 
 export default function ButtonAppBar() {
 
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     return (
@@ -23,12 +24,15 @@ export default function ButtonAppBar() {
                         HayTour
                     </Typography>
 
-                    <Button color="inherit" onClick={() => navigate('/login')}>
-                        Log in
-                    </Button>
-                    <Button color="inherit" onClick={() => navigate('/register')}>
-                        Sign Up
-                    </Button>
+                    {!user ? (
+                    <>
+                        <Button color="inherit" onClick={() => navigate('/login')}>Log in</Button>
+                        <Button color="inherit" onClick={() => navigate('/register')}>Sign Up</Button>
+                    </>
+                    ) : (
+                        <Button color="inherit" onClick={() => navigate('/logout')}>Log Out</Button>
+                    )}
+
                 </Toolbar>
             </AppBar>
         </Box>
