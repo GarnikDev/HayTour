@@ -47,35 +47,49 @@ export default function Register() {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formGroupUsername">
-                <Form.Label>Username*</Form.Label>
-                <Form.Control name="username" type="text" placeholder="Username" value={formData.username} onChange={handleChange} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupPhone">
-                <Form.Label>Phone</Form.Label>
-                <Form.Control name="phone" type="text" placeholder="Phone" value={formData.phone} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupId">
-                <Form.Label>ID number</Form.Label>
-                <Form.Control name="idNumber" type="text" placeholder="Id" value={formData.idNumber} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupEmail">
-                <Form.Label>Email address*</Form.Label>
-                <Form.Control name="email" type="email" placeholder="Enter email" value={formData.email} onChange={handleChange} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupPassword">
-                <Form.Label>Password*</Form.Label>
-                <Form.Control name="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupConfirmPassword">
-                <Form.Label>Confirm Password*</Form.Label>
-                <Form.Control name="confirmPassword" type="password" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
-            </Form.Group>
+        <div className="auth-container">
+            <div className="auth-card">
+                <h2 className="text-center mb-4" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>
+                    Create Account
+                </h2>
+                <Form onSubmit={handleSubmit}>
+                    {/* ID and Phone in one row for a cleaner look */}
+                    <div className="row">
+                        <div className="col-md-6">
+                            <Form.Group className="mb-3" controlId="formGroupUsername">
+                                <Form.Label>Username*</Form.Label>
+                                <Form.Control name="username" type="text" value={formData.username} onChange={handleChange} required />
+                            </Form.Group>
+                        </div>
+                        <div className="col-md-6">
+                            <Form.Group className="mb-3" controlId="formGroupPhone">
+                                <Form.Label>Phone</Form.Label>
+                                <Form.Control name="phone" type="text" value={formData.phone} onChange={handleChange} />
+                            </Form.Group>
+                        </div>
+                    </div>
 
-            <Button type="submit">Register</Button>
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                        <Form.Label>Email address*</Form.Label>
+                        <Form.Control name="email" type="email" value={formData.email} onChange={handleChange} required />
+                    </Form.Group>
 
-            {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
-        </Form>
+                    <Form.Group className="mb-3" controlId="formGroupPassword">
+                        <Form.Label>Password*</Form.Label>
+                        <Form.Control name="password" type="password" value={formData.password} onChange={handleChange} required />
+                    </Form.Group>
+
+                    <Form.Group className="mb-4" controlId="formGroupConfirmPassword">
+                        <Form.Label>Confirm Password*</Form.Label>
+                        <Form.Control name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} required />
+                    </Form.Group>
+
+                    <Button type="submit" className="w-100 btn-primary py-2">
+                        Register
+                    </Button>
+                    {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
+                </Form>
+            </div>
+        </div>
     );
 }

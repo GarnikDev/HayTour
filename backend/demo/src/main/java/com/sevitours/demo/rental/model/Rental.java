@@ -19,10 +19,4 @@ public class Rental {
 
     @Column(name = "\"Time\"")
     private OffsetDateTime time;  // TIMESTAMP without time zone
-
-    @Column(name = "\"Adult_count\"")
-    private Integer adultCount;
-
-    @Column(name = "\"Kid_count\"")
-    private Integer kidCount;
 }

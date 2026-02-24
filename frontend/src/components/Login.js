@@ -38,34 +38,43 @@ export default function Login() {
     }
 
     return (
-        <Form onSubmit={handleSubmit} style={{ width: "300px", margin: "0 auto" }}>
-            <Form.Group className="mb-3" controlId="formGroupUsername">
-                <Form.Label>Username*</Form.Label>
-                <Form.Control
-                    name="username"
-                    type="text"
-                    placeholder="Enter username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
-                />
-            </Form.Group>
+        <div className="auth-container">
+            <div className="auth-card">
+                <h2 className="text-center mb-4" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>
+                    Log In
+                </h2>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formGroupUsername">
+                        <Form.Label>Username*</Form.Label>
+                        <Form.Control
+                            name="username"
+                            type="text"
+                            placeholder="Enter username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
+                        />
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGroupPassword">
-                <Form.Label>Password*</Form.Label>
-                <Form.Control
-                    name="password"
-                    type="password"
-                    placeholder="Enter password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-            </Form.Group>
+                    <Form.Group className="mb-4" controlId="formGroupPassword">
+                        <Form.Label>Password*</Form.Label>
+                        <Form.Control
+                            name="password"
+                            type="password"
+                            placeholder="Enter password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </Form.Group>
 
-            <Button type="submit" className="w-100">Login</Button>
+                    <Button type="submit" className="w-100 btn-primary py-2">
+                        Login
+                    </Button>
 
-            {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
-        </Form>
+                    {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
+                </Form>
+            </div>
+        </div>
     );
 }
