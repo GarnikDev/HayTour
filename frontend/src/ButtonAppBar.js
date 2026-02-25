@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AppBar, Box, Toolbar, Typography, Button, Container, IconButton } from '@mui/material';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'; // Import the back icon
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 
@@ -20,24 +20,21 @@ export default function ButtonAppBar() {
         >
             <Container maxWidth="lg">
                 <Toolbar disableGutters>
-                    
-                    {/* BACK BUTTON */}
                     <IconButton
-                        onClick={() => navigate(-1)} // Navigates to the previous page
+                        onClick={() => navigate(-1)}
                         sx={{
                             mr: 2,
                             color: 'var(--text-main)',
                             transition: 'transform 0.2s',
                             '&:hover': {
                                 backgroundColor: 'rgba(0,0,0,0.05)',
-                                transform: 'translateX(-3px)' // Subtle "peek" animation
+                                transform: 'translateX(-3px)'
                             }
                         }}
                     >
                         <ArrowBackIosNewIcon sx={{ fontSize: '1.2rem' }} />
                     </IconButton>
 
-                    {/* LOGO AREA */}
                     <Typography
                         variant="h5"
                         component="div"
@@ -54,14 +51,10 @@ export default function ButtonAppBar() {
                         HAY<span style={{ color: 'var(--secondary-color)' }}>TOUR</span>
                     </Typography>
 
-                    {/* NAVIGATION LINKS */}
                     <Box sx={{ display: 'flex', gap: 2 }}>
                         {!user ? (
                             <>
-                                <Button
-                                    sx={{ color: 'var(--text-main)', fontWeight: 500 }}
-                                    onClick={() => navigate('/login')}
-                                >
+                                <Button sx={{ color: 'var(--text-main)', fontWeight: 500 }} onClick={() => navigate('/login')}>
                                     Log in
                                 </Button>
                                 <Button
