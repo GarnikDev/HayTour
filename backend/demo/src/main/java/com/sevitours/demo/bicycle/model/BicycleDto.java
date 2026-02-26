@@ -4,10 +4,12 @@ import com.sevitours.demo.bicycle.enums.BikeType;
 import com.sevitours.demo.common.enums.Condition;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class BicycleDto {
-    private Long id;
-    private Integer districtId;
+    private UUID id;
+    private UUID districtId;
     private BikeType type;
     private Condition condition;
 

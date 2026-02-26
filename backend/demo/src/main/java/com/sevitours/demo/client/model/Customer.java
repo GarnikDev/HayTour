@@ -6,15 +6,16 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "\"Customer\"")
 @Data
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"", nullable = false)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "\"Country\"")
     private String country;

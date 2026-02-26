@@ -3,9 +3,11 @@ package com.sevitours.demo.district.model;
 import com.sevitours.demo.district.enums.DistrictType;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class DistrictDto {
-    private Integer id;
+    private UUID id;
     private String region;
     private DistrictType type;
     private String address;

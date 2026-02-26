@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "\"Bike_Use\"")
@@ -20,10 +21,8 @@ import java.time.OffsetDateTime;
 public class BikeUse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"", nullable = false)
-    @EqualsAndHashCode.Include
-    private Long id;
+    private UUID id;
 
     // Discriminator – tells us what kind of usage this is
     @Enumerated(EnumType.STRING)

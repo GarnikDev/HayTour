@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "\"Bill\"")
@@ -15,9 +16,8 @@ import java.time.OffsetDateTime;
 public class Bill {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"", nullable = false)
-    private Long id;
+    private UUID id;
 
     @Column(name = "\"total_amount\"", nullable = false)
     private Double totalAmount;

@@ -4,12 +4,13 @@ import com.sevitours.demo.bill_item.enums.Billing;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Data
 public class Bill_itemDto {
 
-    private Long id;
-    private Long bill_id;
+    private UUID id;
+    private UUID bill_id;
     private Integer quantity;
     private String description;
     private Double unitPrice;

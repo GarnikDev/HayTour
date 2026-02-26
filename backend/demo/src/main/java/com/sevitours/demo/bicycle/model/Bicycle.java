@@ -6,14 +6,15 @@ import com.sevitours.demo.district.model.District;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "\"Bicycle\"")  // Quoted for case-sensitivity
 @Data
 public class Bicycle {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"", nullable = false)
-    private Long id;
+    private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "\"District_id\"", nullable = false)

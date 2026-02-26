@@ -6,11 +6,12 @@ import com.sevitours.demo.bill.enums.Status;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Data
 public class BillDto {
 
-    private Long id;
+    private UUID id;
     private Double subtotal;
     private Status status;
     private Source sourceType;

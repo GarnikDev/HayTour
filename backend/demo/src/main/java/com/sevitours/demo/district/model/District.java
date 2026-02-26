@@ -4,14 +4,15 @@ import com.sevitours.demo.district.enums.DistrictType;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "\"District\"")
 @Data
 public class District {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"", nullable = false)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "\"Region\"", nullable = false)
     private String region;
