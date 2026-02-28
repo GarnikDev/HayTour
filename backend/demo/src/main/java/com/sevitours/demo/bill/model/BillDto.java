@@ -15,8 +15,8 @@ public class BillDto {
     private Double subtotal;
     private Status status;
     private Source sourceType;
-    private Long sourceId;
-    private Integer customerId;
+    private UUID sourceId;
+    private UUID customerId;
     private Currency currency;
     private OffsetDateTime created_at;
 

@@ -5,11 +5,9 @@ import com.sevitours.demo.bill.model.Bill;
 import com.sevitours.demo.bill.model.BillDto;
 import org.springframework.http.ResponseEntity;
 
-public class BillCommandService implements Command<Bill, BillDto> {
+public class BillCommandService{
 
 
-
-    @Override
     public ResponseEntity<BillDto> execute(Bill input) {
         return null;
     }

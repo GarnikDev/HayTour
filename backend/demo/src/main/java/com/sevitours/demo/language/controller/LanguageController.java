@@ -8,49 +8,40 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/languages")
 public class LanguageController {
 
-    private final CreateLanguageService createLanguageService;
-    private final GetLanguageService getLanguageService;
-    private final UpdateLanguageService updateLanguageService;
-    private final DeleteLanguageService deleteLanguageService;
+    private final LanguageService languageService;
 
-    public LanguageController(CreateLanguageService createLanguageService,
-                              GetLanguageService getLanguageService,
-                              UpdateLanguageService updateLanguageService,
-                              DeleteLanguageService deleteLanguageService) {
-        this.createLanguageService = createLanguageService;
-        this.getLanguageService = getLanguageService;
-        this.updateLanguageService = updateLanguageService;
-        this.deleteLanguageService = deleteLanguageService;
+    public LanguageController(LanguageService languageService) {
+        this.languageService = languageService;
     }
 
     @PostMapping("/language")
-    public ResponseEntity<LanguageDto> createLanguage(@RequestBody Language language) {
-        return createLanguageService.execute(language);
+    public ResponseEntity<LanguageDto> create(@RequestBody Language language) {
+        return languageService.create(language);
     }
 
     @GetMapping("/view")
     public ResponseEntity<List<LanguageDto>> getAllLanguages() {
-        Void input = null;
-        return getLanguageService.execute(input);
+        return languageService.getAll();
     }
 
     @GetMapping("/view/id/{id}")
-    public ResponseEntity<LanguageDto> getLanguageById(@PathVariable Integer id) {
-        return getLanguageService.execute(id);
+    public ResponseEntity<LanguageDto> getById(@PathVariable UUID id) {
+        return languageService.getById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<LanguageDto> updateLanguage(@PathVariable Integer id, @RequestBody Language language) {
-        return updateLanguageService.execute(new UpdateLanguageCommand(id, language));
+    public ResponseEntity<LanguageDto> update(@PathVariable UUID id, @RequestBody Language language) {
+        return languageService.update(new UpdateLanguageCommand(id, language));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteLanguage(@PathVariable Integer id) {
-        return deleteLanguageService.execute(id);
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        return languageService.delete(id);
     }
 }

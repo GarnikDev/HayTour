@@ -34,7 +34,7 @@ public class Bill {
     private Source sourceType;
 
     @Column(name = "\"source_id\"", nullable = false)
-    private Long sourceId;
+    private UUID sourceId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", nullable = false)

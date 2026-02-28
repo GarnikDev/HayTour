@@ -3,11 +3,12 @@ package com.sevitours.demo.manager.model;
 import com.sevitours.demo.user.model.AppUser;
 import lombok.Data;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 public class ManagerDto {
-    private Integer id;
-    private Integer districtId;
+    private UUID id;
+    private UUID districtId;
     private LocalDate startDate;
     private AppUser user;
 

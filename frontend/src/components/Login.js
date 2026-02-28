@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
+import { Paper, Box, Typography, TextField, Button, Alert } from '@mui/material';
 import axios from "../api/axiosConfig";
 import { useAuth } from "../context/AuthContext";
 
@@ -23,23 +21,56 @@ export default function Login() {
         } catch (err) {
             setError(err.response?.data?.error || "Invalid username or password");
         }
-    }
+    };
 
     return (
-        <div className="auth-card">
-            <h2 className="text-center mb-4" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>Log In</h2>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Username*</Form.Label>
-                    <Form.Control name="username" type="text" value={formData.username} onChange={handleChange} required />
-                </Form.Group>
-                <Form.Group className="mb-4">
-                    <Form.Label>Password*</Form.Label>
-                    <Form.Control name="password" type="password" value={formData.password} onChange={handleChange} required />
-                </Form.Group>
-                <Button type="submit" className="w-100 btn-primary">Login</Button>
-                {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
-            </Form>
-        </div>
+        <Box className="auth-page-wrapper">
+            <Paper elevation={0} className="auth-card">
+                <Typography
+                    variant="h3"
+                    align="center"
+                    sx={{ color: 'var(--primary-color)', fontWeight: 800, mb: 4 }}
+                >
+                    Log In
+                </Typography>
+
+                <Box component="form" onSubmit={handleSubmit} noValidate>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        value={formData.username}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        size="large"
+                        sx={{ mt: 4, py: 2 }} // Matches Register button spacing
+                    >
+                        Login
+                    </Button>
+
+                    {error && <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>}
+                </Box>
+            </Paper>
+        </Box>
     );
 }

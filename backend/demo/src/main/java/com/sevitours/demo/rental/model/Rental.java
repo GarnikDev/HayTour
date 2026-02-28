@@ -4,15 +4,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "\"Rental\"")
 @Data
 public class Rental {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"")
-    private Integer id;
+    private UUID id;
 
     @Column(name = "\"Duration\"")
     private Integer duration;  // Assuming smallint as minutes or hours

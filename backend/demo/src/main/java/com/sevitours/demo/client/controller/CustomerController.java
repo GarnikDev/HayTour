@@ -12,50 +12,42 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/api/clients")
 @CrossOrigin(origins = "http://localhost:3000/")
 public class CustomerController {
-    private final GetClientService getClientService;
-    private final CreateClientService createClientService;
-    private final DeleteClientService deleteClientService;
-    private final UpdateClientService updateClientService;
 
-    public CustomerController(GetClientService getClientService,
-                              CreateClientService createClientService,
-                              DeleteClientService deleteClientService,
-                              UpdateClientService updateClientService) {
-        this.getClientService = getClientService;
-        this.createClientService = createClientService;
-        this.deleteClientService = deleteClientService;
-        this.updateClientService = updateClientService;
+    private final CustomerService customerService;
+
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @PostMapping("/customer") // Will probably need to be improved in order to ensure the district with the id exists
     public ResponseEntity<CustomerDto> createClient(@RequestBody Customer customer) {
-        return createClientService.execute(customer);
+        return customerService.create(customer);
     }
 
     @GetMapping("/view")
     public ResponseEntity<List<CustomerDto>> getAllClients(Model model) {
         Void input = null;
-        return getClientService.execute(input);
+        return customerService.getAll(input);
     }
 
     @GetMapping("/view/id/{id}")
-    public ResponseEntity<CustomerDto> getClient(@PathVariable Integer id) {
-        return getClientService.execute(id);
+    public ResponseEntity<CustomerDto> getClient(@PathVariable UUID id) {
+        return customerService.getById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<CustomerDto> updateClient(@PathVariable Integer id, @RequestBody Customer customer) {
-        getClientService.execute(id);
-        return updateClientService.execute(new UpdateCustomerCommand(id, customer));
+    public ResponseEntity<CustomerDto> updateClient(@PathVariable UUID id, @RequestBody Customer customer) {
+        return customerService.update(new UpdateCustomerCommand(id, customer));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
-        return deleteClientService.execute(id);
+    public ResponseEntity<Void> deleteClient(@PathVariable UUID id) {
+        return customerService.delete(id);
     }
 }

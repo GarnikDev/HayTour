@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -23,6 +22,7 @@ public class AuthService {
     private final String supabaseUrl;
     private final RestTemplate restTemplate = new RestTemplate();
     private final AppUserRepository appUserRepository;
+
     public AuthService(@Value("${security.anon-key}") String anonKey,
                        @Value("${security.url}") String supabaseUrl,
                        AppUserRepository appUserRepository) {

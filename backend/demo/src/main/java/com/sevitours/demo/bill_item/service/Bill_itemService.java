@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class Bill_itemService {
@@ -42,7 +43,7 @@ public class Bill_itemService {
     }
 
     //Get a Bill_item by Id
-    public ResponseEntity<Bill_itemDto> getById(Long input){ // Get bill_item by ID
+    public ResponseEntity<Bill_itemDto> getById(UUID input){ // Get bill_item by ID
         Optional<Bill_item> bill_itemOptional = bill_itemRepository.findById(input);
         if (bill_itemOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(bill_itemMapper.toDto(bill_itemOptional.get()));
@@ -52,7 +53,7 @@ public class Bill_itemService {
     }
 
     //Delete a bill_item by id
-    public ResponseEntity<Void> deleteById(Long id) {
+    public ResponseEntity<Void> deleteById(UUID id) {
 
         Optional<Bill_item> optionalBill_item = bill_itemRepository.findById(id);
         if(optionalBill_item.isPresent()) {

@@ -4,12 +4,13 @@ import com.sevitours.demo.tour.enums.TourType;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Data
 public class TourDto {
-    private Integer id;
+    private UUID id;
     private OffsetDateTime time;
-    private Integer guideId;
+    private UUID guideId;
     private TourType type;
 
     public TourDto(Tour tour) {

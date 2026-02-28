@@ -3,10 +3,11 @@ package com.sevitours.demo.rental.model;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Data
 public class RentalDto {
-    private Integer id;
+    private UUID id;
     private Integer duration;
     private OffsetDateTime time;
 

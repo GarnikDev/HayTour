@@ -2,9 +2,11 @@ package com.sevitours.demo.language.model;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class LanguageDto {
-    private Integer id;
+    private UUID id;
     private String languageCode;
 
     public LanguageDto(Language language) {

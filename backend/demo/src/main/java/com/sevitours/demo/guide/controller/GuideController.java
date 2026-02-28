@@ -8,49 +8,40 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/guides")
 public class GuideController {
 
-    private final CreateGuideService createGuideService;
-    private final GetGuideService getGuideService;
-    private final UpdateGuideService updateGuideService;
-    private final DeleteGuideService deleteGuideService;
+    private final GuideService guideService;
 
-    public GuideController(CreateGuideService createGuideService,
-                           GetGuideService getGuideService,
-                           UpdateGuideService updateGuideService,
-                           DeleteGuideService deleteGuideService) {
-        this.createGuideService = createGuideService;
-        this.getGuideService = getGuideService;
-        this.updateGuideService = updateGuideService;
-        this.deleteGuideService = deleteGuideService;
+    public GuideController(GuideService guideService) {
+        this.guideService = guideService;
     }
 
     @PostMapping("/guide")
     public ResponseEntity<GuideDto> createGuide(@RequestBody Guide guide) {
-        return createGuideService.execute(guide);
+        return guideService.create(guide);
     }
 
     @GetMapping("/view")
     public ResponseEntity<List<GuideDto>> getAllGuides() {
-        Void input = null;
-        return getGuideService.execute(input);
+        return guideService.getAll();
     }
 
     @GetMapping("/view/id/{id}")
-    public ResponseEntity<GuideDto> getGuideById(@PathVariable Integer id) {
-        return getGuideService.execute(id);
+    public ResponseEntity<GuideDto> getGuideById(@PathVariable UUID id) {
+        return guideService.getById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<GuideDto> updateGuide(@PathVariable Integer id, @RequestBody Guide guide) {
-        return updateGuideService.execute(new UpdateGuideCommand(id, guide));
+    public ResponseEntity<GuideDto> updateGuide(@PathVariable UUID id, @RequestBody Guide guide) {
+        return guideService.update(new UpdateGuideCommand(id, guide));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteGuide(@PathVariable Integer id) {
-        return deleteGuideService.execute(id);
+    public ResponseEntity<Void> deleteGuide(@PathVariable UUID id) {
+        return guideService.delete(id);
     }
 }

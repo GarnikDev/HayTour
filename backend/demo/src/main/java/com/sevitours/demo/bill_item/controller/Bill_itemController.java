@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/bill_items")
@@ -31,17 +32,17 @@ public class Bill_itemController {
     }
 
     @GetMapping("/view/id/{id}")
-    public ResponseEntity<Bill_itemDto> getBill_itemById(@PathVariable Long id) {
+    public ResponseEntity<Bill_itemDto> getBill_itemById(@PathVariable UUID id) {
         return bill_itemService.getById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Bill_itemDto> updateBill_item(@PathVariable Long id, @RequestBody Bill_item bill_item) {
+    public ResponseEntity<Bill_itemDto> updateBill_item(@PathVariable UUID id, @RequestBody Bill_item bill_item) {
         return bill_itemService.update(new UpdateBill_itemCommand(id, bill_item));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBill_item(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBill_item(@PathVariable UUID id) {
         return bill_itemService.deleteById(id);
     }
 

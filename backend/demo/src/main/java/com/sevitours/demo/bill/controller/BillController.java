@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/bills")
@@ -31,17 +32,17 @@ public class BillController {
     }
 
     @GetMapping("/view/id/{id}")
-    public ResponseEntity<BillDto> getBillById(@PathVariable Long id) {
+    public ResponseEntity<BillDto> getBillById(@PathVariable UUID id) {
         return billService.getById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<BillDto> updateBill(@PathVariable Long id, @RequestBody Bill bill) {
+    public ResponseEntity<BillDto> updateBill(@PathVariable UUID id, @RequestBody Bill bill) {
         return billService.update(new UpdateBillCommand(bill, id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBill(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBill(@PathVariable UUID id) {
         return billService.deleteById(id);
     }
 

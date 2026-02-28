@@ -8,49 +8,40 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/tours")
 public class TourController {
 
-    private final CreateTourService createService;
-    private final GetTourService getService;
-    private final UpdateTourService updateService;
-    private final DeleteTourService deleteService;
+    private final TourService tourService;
 
-    public TourController(CreateTourService createService,
-                          GetTourService getService,
-                          UpdateTourService updateService,
-                          DeleteTourService deleteService) {
-        this.createService = createService;
-        this.getService = getService;
-        this.updateService = updateService;
-        this.deleteService = deleteService;
+    public TourController(TourService tourService) {
+        this.tourService = tourService;
     }
 
     @PostMapping("/tour")
     public ResponseEntity<TourDto> create(@RequestBody Tour tour) {
-        return createService.execute(tour);
+        return tourService.create(tour);
     }
 
     @GetMapping("/view")
     public ResponseEntity<List<TourDto>> getAll() {
-        Void input = null;
-        return getService.execute(input);
+        return tourService.getAll();
     }
 
     @GetMapping("/view/id/{id}")
-    public ResponseEntity<TourDto> getById(@PathVariable Integer id) {
-        return getService.execute(id);
+    public ResponseEntity<TourDto> getById(@PathVariable UUID id) {
+        return tourService.getById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<TourDto> update(@PathVariable Integer id, @RequestBody Tour tour) {
-        return updateService.execute(new UpdateTourCommand(id, tour));
+    public ResponseEntity<TourDto> update(@PathVariable UUID id, @RequestBody Tour tour) {
+        return tourService.update(new UpdateTourCommand(id, tour));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        return deleteService.execute(id);
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        return tourService.delete(id);
     }
 }

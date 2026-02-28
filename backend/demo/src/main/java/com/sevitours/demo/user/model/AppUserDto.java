@@ -15,7 +15,6 @@ public class AppUserDto {
     private String email;
     private String phone;
     private String idNumber;
-    private String password;
     private Boolean enabled;
     private OffsetDateTime createdAt;
     private AppUserRole role;
@@ -27,7 +26,6 @@ public class AppUserDto {
             this.email = appUser.getEmail();
             this.phone = appUser.getPhone();
             this.idNumber = appUser.getIdNumber();
-            this.password = appUser.getPassword();
             this.enabled = appUser.getEnabled();
             this.createdAt = appUser.getCreatedAt();
             this.role = appUser.getRole();

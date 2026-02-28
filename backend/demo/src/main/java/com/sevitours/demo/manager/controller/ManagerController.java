@@ -8,49 +8,40 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/managers")
 public class ManagerController {
 
-    private final CreateManagerService createManagerService;
-    private final GetManagerService getManagerService;
-    private final UpdateManagerService updateManagerService;
-    private final DeleteManagerService deleteManagerService;
+    private final ManagerService managerService;
 
-    public ManagerController(CreateManagerService createManagerService,
-                             GetManagerService getManagerService,
-                             UpdateManagerService updateManagerService,
-                             DeleteManagerService deleteManagerService) {
-        this.createManagerService = createManagerService;
-        this.getManagerService = getManagerService;
-        this.updateManagerService = updateManagerService;
-        this.deleteManagerService = deleteManagerService;
+    public ManagerController(ManagerService managerService) {
+        this.managerService = managerService;
     }
 
     @PostMapping("/manager")
     public ResponseEntity<ManagerDto> create(@RequestBody Manager manager) {
-        return createManagerService.execute(manager);
+        return managerService.create(manager);
     }
 
     @GetMapping("/view")
     public ResponseEntity<List<ManagerDto>> getAll() {
-        Void input = null;
-        return getManagerService.execute(input);
+        return managerService.getAll();
     }
 
     @GetMapping("/view/id/{id}")
-    public ResponseEntity<ManagerDto> getById(@PathVariable Integer id) {
-        return getManagerService.execute(id);
+    public ResponseEntity<ManagerDto> getById(@PathVariable UUID id) {
+        return managerService.getById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<ManagerDto> update(@PathVariable Integer id, @RequestBody Manager manager) {
-        return updateManagerService.execute(new UpdateManagerCommand(id, manager));
+    public ResponseEntity<ManagerDto> update(@PathVariable UUID id, @RequestBody Manager manager) {
+        return managerService.update(new UpdateManagerCommand(id, manager));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        return deleteManagerService.execute(id);
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        return managerService.delete(id);
     }
 }

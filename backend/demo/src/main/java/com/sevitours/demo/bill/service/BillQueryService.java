@@ -6,9 +6,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public class BillQueryService implements Query<Void, List<BillDto>> {
+public class BillQueryService{
 
-    @Override
     public ResponseEntity<List<BillDto>> execute(Void input) {
         return null;
     }

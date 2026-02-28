@@ -9,15 +9,15 @@ import java.util.UUID;
 public class CustomerDto {
     private UUID id;
     private String country;
-    private Integer languageId;
-    private AppUser user;
+    private UUID languageId;
+    private UUID userId;
 
     public CustomerDto(Customer customer) {
         if(customer != null){
             this.id = customer.getId();
             this.country = customer.getCountry();
             this.languageId = customer.getLanguage().getId();
-            this.user = customer.getUser();
+            this.userId = customer.getUser().getId();
         }
     }
 }

@@ -1,23 +1,24 @@
-import React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import { activeTheme, createAppTheme } from './styles/styles';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from "./context/AuthContext";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {Routes, Route, BrowserRouter} from 'react-router-dom';
-import Register from "./components/Register";
-import RegistrationSuccessful from "./components/RegistrationSuccessful";
+
+// Components
 import ButtonAppBar from "./ButtonAppBar";
-import Login from "./components/Login";
-import ClientList from "./components/ClientList";
-import Logout from "./components/Logout";
-import { useEffect } from "react";
-import { activeTheme } from './styles/styles';
-import Home from "./components/Home";
 import Footer from "./components/Footer";
-import WalkingTours from './components/WalkingTours'; // adjust path as needed
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Logout from "./components/Logout";
+import ClientList from "./components/ClientList";
+import WalkingTours from './components/WalkingTours';
 import BusTours from './components/BusTours';
 import BikeTours from './components/BikeTours';
 
-function App() {
+function App() {const muiTheme = createAppTheme();
+
     useEffect(() => {
         const root = document.documentElement;
         Object.entries(activeTheme).forEach(([key, value]) => {
@@ -26,28 +27,28 @@ function App() {
     }, []);
 
     return (
-        <AuthProvider>
-            <div className="App">
-                <BrowserRouter>
-                    <ButtonAppBar />
-                    {/* The main content area */}
-                    <main style={{ minHeight: '80vh' }}>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/api/clients/view" element={<ClientList />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/logout" element={<Logout />} />
-                            <Route path="/registrationSuccessful" element={<RegistrationSuccessful />} />
-                            <Route path="/tours/walk" element={<WalkingTours />} />
-                            <Route path="/tours/bus" element={<BusTours/>}/>
-                            <Route path="/tours/bike" element={<BikeTours/>}/>
-                        </Routes>
-                    </main>
-                    <Footer />
-                </BrowserRouter>
-            </div>
-        </AuthProvider>
+        <ThemeProvider theme={muiTheme}>
+            <AuthProvider>
+                <div className="App">
+                    <BrowserRouter>
+                        <ButtonAppBar />
+                        <main>
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/api/clients/view" element={<ClientList />} />
+                                <Route path="/register" element={<Register />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/logout" element={<Logout />} />
+                                <Route path="/tours/walk" element={<WalkingTours />} />
+                                <Route path="/tours/bus" element={<BusTours/>}/>
+                                <Route path="/tours/bike" element={<BikeTours/>}/>
+                            </Routes>
+                        </main>
+                        <Footer />
+                    </BrowserRouter>
+                </div>
+            </AuthProvider>
+        </ThemeProvider>
     );
 }
 

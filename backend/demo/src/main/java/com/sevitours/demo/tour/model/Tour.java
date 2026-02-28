@@ -6,15 +6,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "\"Tour\"")
 @Data
 public class Tour {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Id\"")
-    private Integer id;
+    private UUID id;
 
     @Column(name = "\"Time\"")
     private OffsetDateTime time;
