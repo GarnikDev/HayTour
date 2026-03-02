@@ -67,7 +67,7 @@ public class BikeUseService {
             BikeUse bikeUse = command.getBikeUse();
             bikeUse.setId(command.getId());
             bikeUseRepository.save(bikeUse);
-            return ResponseEntity.ok(new BikeUseDto(bikeUse));
+            return ResponseEntity.status(HttpStatus.OK).body(bikeUseMapper.toDto(bikeUse));
         }
 
         throw new ItemNotFound("Bike Use");

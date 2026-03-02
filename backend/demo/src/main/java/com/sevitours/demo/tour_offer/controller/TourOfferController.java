@@ -1,9 +1,7 @@
 package com.sevitours.demo.tour_offer.controller;
 
-import com.sevitours.demo.tour_offer.model.TourOffer;
 import com.sevitours.demo.tour_offer.model.TourOfferDto;
 import com.sevitours.demo.tour_offer.services.TourOfferService;
-import com.sevitours.demo.tour_offer.services.UpdateTourOfferCommand;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

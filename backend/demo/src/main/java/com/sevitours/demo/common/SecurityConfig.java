@@ -39,7 +39,7 @@ public class SecurityConfig {
                         // 2. Explicitly permit ALL OPTIONS (preflight) requests
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Explicitly permit these
-                        .requestMatchers("/register", "/login", "/error", "/logout", "/api/tourOffers/**").permitAll()
+                        .requestMatchers("/register", "/login", "/error", "/logout", "/api/tourOffers/view/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth -> oauth

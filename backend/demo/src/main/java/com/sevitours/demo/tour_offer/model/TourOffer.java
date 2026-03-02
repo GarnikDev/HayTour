@@ -28,7 +28,7 @@ public class TourOffer {
     private String place;
 
     @Column(name = "\"Duration\"")
-    private Integer duration;
+    private Double duration;
 
     @Column(name = "\"BasePrice\"")
     private Double basePrice;

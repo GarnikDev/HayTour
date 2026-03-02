@@ -15,7 +15,7 @@ public class TourOfferDto {
     private UUID id;
     private String title;
     private String description;
-    private Integer duration;
+    private Double duration;
     private String place;
     private Double basePrice;
     private OffsetDateTime createdAt;
