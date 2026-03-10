@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-    Box,
-    Typography,
-    Container,
-    TextField,
-    Button,
-    Alert,
-    Paper,
-    Grid,
-    Divider
+    Box, Typography, Container, TextField, Button, Alert, Paper, Grid, Divider,
+    ToggleButton, ToggleButtonGroup
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
+import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
+import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
+import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import axios from "../api/axiosConfig";
 
 export default function EditTour() {
@@ -28,14 +24,18 @@ export default function EditTour() {
         basePrice: "",
         duration: "",
         place: "",
-        imageUrl: "" // Keep track of the existing URL
+        type: "WALK", // Initial fallback
+        imageUrl: ""
     });
 
-    // 1. Fetch existing data on mount
     useEffect(() => {
         axios.get(`/api/tourOffers/view/${id}`)
             .then(res => {
-                setFormData(res.data);
+                // Spread the response data but ensure type is captured
+                setFormData({
+                    ...res.data,
+                    type: res.data.type || "WALK"
+                });
             })
             .catch(err => {
                 console.error("Fetch error:", err);
@@ -47,31 +47,42 @@ export default function EditTour() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const handleTypeChange = (event, newType) => {
+        // ToggleButtonGroup returns null if you click the already-selected item
+        // This check prevents the type from becoming null
+        if (newType !== null) {
+            setFormData(prev => ({ ...prev, type: newType }));
+        }
+    };
+
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             setImageFile(e.target.files[0]);
         }
     };
 
-    // 2. Handle Update (PUT)
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
         const data = new FormData();
+
+        // Ensure this DTO matches your Java TourOfferDTO exactly
         const tourDto = {
             title: formData.title,
             description: formData.description,
             basePrice: parseFloat(formData.basePrice),
             duration: formData.duration,
-            place: formData.place
+            place: formData.place,
+            type: formData.type // This must match the field name in Java DTO
         };
 
-        // Wrap JSON in Blob for @RequestPart
+        // Debug: Check your console to see if the type is correct here
+        console.log("Sending DTO to backend:", tourDto);
+
         data.append("tourOffer", new Blob([JSON.stringify(tourDto)], { type: "application/json" }));
 
-        // Append image only if a new one is selected
         if (imageFile) {
             data.append("image", imageFile);
         }
@@ -89,18 +100,13 @@ export default function EditTour() {
         }
     };
 
-    // 3. Handle Delete (DELETE)
     const handleDelete = async () => {
-        if (!window.confirm("Are you sure you want to delete this tour? This action cannot be undone.")) {
-            return;
-        }
-
+        if (!window.confirm("Are you sure you want to delete this tour?")) return;
         setLoading(true);
         try {
             await axios.delete(`/api/tourOffers/delete/${id}`);
             navigate("/tours");
         } catch (err) {
-            console.error("Delete error:", err);
             setError("Failed to delete tour.");
             setLoading(false);
         }
@@ -110,25 +116,33 @@ export default function EditTour() {
         <Container maxWidth="md" sx={{ py: 5 }}>
             <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-                    <Typography variant="h4" fontWeight={700} color="secondary">
-                        Edit Tour
-                    </Typography>
-                    <Button
-                        variant="outlined"
-                        color="error"
-                        startIcon={<DeleteIcon />}
-                        onClick={handleDelete}
-                        disabled={loading}
-                    >
+                    <Typography variant="h4" fontWeight={700} color="secondary">Edit Tour</Typography>
+                    <Button variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={handleDelete} disabled={loading}>
                         Delete Tour
                     </Button>
                 </Box>
 
                 <Box component="form" onSubmit={handleSubmit}>
                     <Grid container spacing={3}>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={8}>
                             <TextField fullWidth label="Tour Title" name="title" value={formData.title} onChange={handleChange} required />
                         </Grid>
+
+                        <Grid item xs={12} sm={4}>
+                            <Typography variant="caption" color="text.secondary" display="block" mb={1}>Tour Type</Typography>
+                            <ToggleButtonGroup
+                                value={formData.type}
+                                exclusive
+                                onChange={handleTypeChange}
+                                fullWidth
+                                color="secondary"
+                            >
+                                <ToggleButton value="WALK"><DirectionsWalkIcon /></ToggleButton>
+                                <ToggleButton value="BIKE"><DirectionsBikeIcon /></ToggleButton>
+                                <ToggleButton value="BUS"><DirectionsBusIcon /></ToggleButton>
+                            </ToggleButtonGroup>
+                        </Grid>
+
                         <Grid item xs={12} sm={6}>
                             <TextField fullWidth label="Place" name="place" value={formData.place} onChange={handleChange} required />
                         </Grid>
@@ -144,33 +158,14 @@ export default function EditTour() {
 
                         <Grid item xs={12}>
                             <Divider sx={{ my: 2 }} />
-                            <Typography variant="subtitle1" mb={2} fontWeight={600}>
-                                Tour Image
-                            </Typography>
-
-                            {/* PREVIEW LOGIC */}
+                            <Typography variant="subtitle1" mb={2} fontWeight={600}>Tour Image</Typography>
                             <Box mb={2} sx={{ width: '100%', maxWidth: 400 }}>
                                 {imageFile ? (
-                                    <>
-                                        <Typography variant="caption" color="primary">New Image Selected:</Typography>
-                                        <img
-                                            src={URL.createObjectURL(imageFile)}
-                                            alt="Preview"
-                                            style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', border: '2px solid #1976d2' }}
-                                        />
-                                    </>
-                                ) : formData.imageUrl ? (
-                                    <>
-                                        <Typography variant="caption">Current Image:</Typography>
-                                        <img
-                                            src={formData.imageUrl}
-                                            alt="Current"
-                                            style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
-                                        />
-                                    </>
-                                ) : null}
+                                    <img src={URL.createObjectURL(imageFile)} alt="Preview" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', border: '2px solid #9c27b0' }} />
+                                ) : formData.imageUrl && (
+                                    <img src={formData.imageUrl} alt="Current" style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }} />
+                                )}
                             </Box>
-
                             <Button variant="outlined" component="label" fullWidth sx={{ py: 1.5, borderStyle: 'dashed' }}>
                                 {imageFile ? "Change Selected Image" : "Upload New Image"}
                                 <input type="file" hidden accept="image/*" onChange={handleFileChange} />
@@ -181,24 +176,10 @@ export default function EditTour() {
                     {error && <Alert severity="error" sx={{ mt: 3 }}>{error}</Alert>}
 
                     <Box mt={4} display="flex" gap={2}>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="secondary"
-                            size="large"
-                            startIcon={<SaveIcon />}
-                            disabled={loading}
-                            sx={{ minWidth: 150 }}
-                        >
+                        <Button type="submit" variant="contained" color="secondary" size="large" startIcon={<SaveIcon />} disabled={loading}>
                             {loading ? "Saving..." : "Save Changes"}
                         </Button>
-                        <Button
-                            variant="text"
-                            onClick={() => navigate('/tours')}
-                            disabled={loading}
-                        >
-                            Cancel
-                        </Button>
+                        <Button variant="text" onClick={() => navigate('/tours')}>Cancel</Button>
                     </Box>
                 </Box>
             </Paper>

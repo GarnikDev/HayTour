@@ -68,6 +68,7 @@ public class TourOfferService {
         existingTour.setPlace(dto.getPlace());
         existingTour.setDuration(dto.getDuration());
         existingTour.setBasePrice(dto.getBasePrice());
+        existingTour.setType(dto.getType());
         // Note: We usually don't update createdAt or the AppUser on an 'Edit'
         // unless you specifically want to track "lastModifiedBy"
 

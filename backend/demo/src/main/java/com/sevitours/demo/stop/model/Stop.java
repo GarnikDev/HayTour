@@ -1,5 +1,6 @@
 package com.sevitours.demo.stop.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sevitours.demo.tour_offer.model.TourOffer;
 import com.sevitours.demo.user.model.AppUser;
 import jakarta.persistence.*;
@@ -14,11 +15,13 @@ import java.util.UUID;
 public class Stop {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "\"StopID\"")
     private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "\"TourOffer_Id\"")
+    @JsonBackReference
     private TourOffer tourOffer;
 
     @Column(name = "\"Title\"")

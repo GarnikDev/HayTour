@@ -1,15 +1,16 @@
-package com.sevitours.demo.stop.model;
+package com.sevitours.demo.tour_price.model;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface StopMapper {
+public interface TourPriceMapper {
+
     @Mapping(source = "tourOffer.id", target = "tourOfferId")
-    StopDto toDto(Stop entity);
+    TourPriceDto toDto(TourPrice tourOffer);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "tourOfferId", target = "tourOffer.id")
-    Stop toEntity(StopDto dto);
+    TourPrice toEntity(TourPriceDto tourOfferDto);
 
 }

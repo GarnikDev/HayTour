@@ -1,12 +1,17 @@
 package com.sevitours.demo.common;
 
+import com.sevitours.demo.user.model.AppUser;
+import com.sevitours.demo.user.repo.AppUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import jakarta.servlet.http.Cookie;
@@ -21,10 +26,13 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
@@ -131,5 +139,35 @@ public class SecurityConfig {
                 System.err.println("CAUSE: " + event.getException().getCause().getMessage());
             }
         };
+    }
+
+    @Bean
+    public JwtAuthenticationConverter customJwtAuthenticationConverter(AppUserRepository userRepository) {
+        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+
+        converter.setJwtGrantedAuthoritiesConverter(jwt -> {
+            try {
+                // 1. Get the UUID (subject) from the Supabase token
+                UUID userId = UUID.fromString(jwt.getSubject());
+
+                // 2. Look up the user in your database
+                AppUser user = userRepository.findById(userId).orElse(null);
+
+                // 3. If found, attach the role.
+                // NOTE: Spring Security requires the "ROLE_" prefix!
+                if (user != null && user.getRole() != null) {
+                    return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+                }
+            } catch (Exception e) {
+                // Log error if UUID parsing fails
+                System.out.println("Could not parse user role: " + e.getMessage());
+            }
+
+            // If user isn't in DB yet, return no special roles
+            return Collections.emptyList();
+        });
+
+        return converter;
+
     }
 }

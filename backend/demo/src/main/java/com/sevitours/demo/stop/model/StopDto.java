@@ -1,11 +1,15 @@
 package com.sevitours.demo.stop.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class StopDto {
 
     private UUID id;
@@ -19,7 +23,9 @@ public class StopDto {
 
     public StopDto(Stop stop) {
         this.id = stop.getId();
-        this.tourOfferId = stop.getTourOffer().getId();
+        if (stop.getTourOffer() != null) {
+            this.tourOfferId = stop.getTourOffer().getId();
+        }
         this.title = stop.getTitle();
         this.description = stop.getDescription();
         this.latitude = stop.getLatitude();

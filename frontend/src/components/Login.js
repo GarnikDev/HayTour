@@ -17,7 +17,7 @@ export default function Login() {
         try {
             await axios.post("/login", formData);
             await checkAuth();
-            navigate("/api/clients/view");
+            navigate("/");
         } catch (err) {
             setError(err.response?.data?.error || "Invalid username or password");
         }

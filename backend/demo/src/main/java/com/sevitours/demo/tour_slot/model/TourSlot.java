@@ -1,6 +1,7 @@
 package com.sevitours.demo.tour_slot.model;
 
-import com.sevitours.demo.tour.model.Tour;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sevitours.demo.tour_offer.model.TourOffer;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,7 +25,8 @@ public class TourSlot {
     private LocalTime endTime;
 
     @ManyToOne
-    @JoinColumn(name = "tour_id")
-    private Tour tour;
+    @JoinColumn(name = "tourOffer_id")
+    @JsonBackReference
+    private TourOffer tourOffer;
 
 }

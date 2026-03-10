@@ -16,6 +16,7 @@ import ClientList from "./components/ClientList";
 import WalkingTours from './components/WalkingTours';
 import BusTours from './components/BusTours';
 import BikeTours from './components/BikeTours';
+import TourDetails from './components/TourDetails';
 
 function App() {const muiTheme = createAppTheme();
 
@@ -42,6 +43,7 @@ function App() {const muiTheme = createAppTheme();
                                 <Route path="/tours/walk" element={<WalkingTours />} />
                                 <Route path="/tours/bus" element={<BusTours/>}/>
                                 <Route path="/tours/bike" element={<BikeTours/>}/>
+                                <Route path="/tours/:id" element={<TourDetails />} />
                             </Routes>
                         </main>
                         <Footer />

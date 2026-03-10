@@ -4,6 +4,7 @@ import com.sevitours.demo.tour_offer.model.TourOfferDto;
 import com.sevitours.demo.tour_offer.services.TourOfferService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +23,7 @@ public class TourOfferController {
     }
 
     @PostMapping(value = "/tourOffer", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasRole('MANAGER')")
     public ResponseEntity<TourOfferDto> create(
             @RequestPart("tourOffer") TourOfferDto tourOfferDto, // Change this to DTO
             @RequestPart("image") MultipartFile image
@@ -40,6 +42,7 @@ public class TourOfferController {
     }
 
     @PutMapping(value = "/edit/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasRole('MANAGER')")
     public ResponseEntity<TourOfferDto> update(
             @PathVariable UUID id,
             @RequestPart("tourOffer") TourOfferDto tourOfferDto,
@@ -49,6 +52,7 @@ public class TourOfferController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('MANAGER')")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         return tourOfferService.delete(id);
     }

@@ -21,8 +21,8 @@ public class StopController {
     }
 
     @PostMapping("/stop")
-    public ResponseEntity<StopDto> create(@RequestBody Stop stop) {
-        return stopService.create(stop);
+    public ResponseEntity<StopDto> addStop(@RequestBody StopDto dto) {
+        return stopService.create(dto);
     }
 
     @GetMapping("/view/{id}")

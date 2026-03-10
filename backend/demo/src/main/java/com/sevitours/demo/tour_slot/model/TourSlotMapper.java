@@ -6,10 +6,11 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface TourSlotMapper {
 
-    @Mapping(source = "tour.id", target = "tourId")
+    @Mapping(source = "tourOffer.id", target = "tourOfferId")
     TourSlotDto toDto(TourSlot tourSlot);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(source = "tourOfferId", target = "tourOffer.id")
     TourSlot toEntity(TourSlotDto tourSlotDto);
 
 }

@@ -21,8 +21,8 @@ public class TourSlotController {
     }
 
     @PostMapping("/tour_slot")
-    public ResponseEntity<TourSlotDto> addTourSlot(@RequestBody TourSlot tourSlot) {
-        return tourSlotService.create(tourSlot);
+    public ResponseEntity<TourSlotDto> addTourSlot(@RequestBody TourSlotDto tourSlotDto) {
+        return tourSlotService.create(tourSlotDto);
     }
 
     @GetMapping("/view")
